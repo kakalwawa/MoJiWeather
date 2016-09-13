@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.Window;
 
 /**
- * Created by dllo on 16/8/15.
+ * Created by 高翔 on 16/8/15.
  */
 public abstract class BaseActivity extends FragmentActivity {
 
@@ -17,6 +17,7 @@ public abstract class BaseActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(setLayout());
+        NetTool netTool = NetTool.getInstance();
         initView();
         initDate();
 

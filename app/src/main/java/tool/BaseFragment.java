@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * Created by dllo on 16/8/15.
+ * Created by 高翔 on 16/8/15.
  */
 public abstract class BaseFragment extends Fragment {
     protected Context mContext;
@@ -19,7 +19,7 @@ public abstract class BaseFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         mContext = context;
-
+        NetTool netTool = NetTool.getInstance();
     }
 
     @Nullable

@@ -2,17 +2,14 @@ package lanou.mojiweather;
 
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
-import lanou.mojiweather.me.fragment.BackgroundFragment;
+import lanou.mojiweather.background.fragment.BackgroundFragment;
 import lanou.mojiweather.me.fragment.MeFragment;
 import lanou.mojiweather.weather.fragment.WeatherFragment;
 import tool.BaseActivity;
-import tool.NetTool;
 
 
 public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {

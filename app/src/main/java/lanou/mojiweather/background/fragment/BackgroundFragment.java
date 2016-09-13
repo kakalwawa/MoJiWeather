@@ -1,7 +1,4 @@
-package lanou.mojiweather.me.fragment;
-
-import android.support.v4.app.Fragment;
-
+package lanou.mojiweather.background.fragment;
 import lanou.mojiweather.R;
 import tool.BaseFragment;
 

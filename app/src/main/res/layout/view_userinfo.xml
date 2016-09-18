@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Rl_userinfo"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_alignParentBottom="true">
+
+    <RelativeLayout
+        android:id="@+id/BM_Ll_mine_center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:src="@mipmap/owner_friend_dynamic"
+            android:id="@+id/BM_Iv_mine_head"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_margin="8dp"
+            android:layout_centerInParent="true"
+           />
+
+
+        <TextView
+            android:id="@+id/BM_Tv_mine_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/BM_Iv_mine_head"
+            android:layout_centerHorizontal="true"
+            android:singleLine="true"
+            android:text="未登录"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp" />
+
+    </RelativeLayout>
+    <ImageView
+        android:id="@+id/BM_Iv_mine_share"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/BM_Ll_mine_center"
+        android:src="@mipmap/owner_message"
+        />
+
+    <TextView
+        android:id="@+id/BM_Tv_mine_username_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:layout_marginLeft="20dp"
+        android:text="未登录"
+        android:layout_centerVertical="true"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        />
+
+</RelativeLayout>

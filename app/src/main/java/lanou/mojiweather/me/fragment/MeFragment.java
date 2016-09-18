@@ -1,10 +1,15 @@
 package lanou.mojiweather.me.fragment;
 
+<<<<<<< HEAD
 
 import lanou.mojiweather.R;
 import tool.BaseFragment;
 import view.MyScrollView;
 import view.UserInfoView;
+=======
+import lanou.mojiweather.R;
+import lanou.mojiweather.tool.BaseFragment;
+>>>>>>> develop
 
 /**
  * Created by 高翔 on 16/9/13.

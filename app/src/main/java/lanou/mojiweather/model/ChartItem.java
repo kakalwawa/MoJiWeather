@@ -1,4 +1,4 @@
-package model;
+package lanou.mojiweather.model;
 
 public class ChartItem {
     private String x;

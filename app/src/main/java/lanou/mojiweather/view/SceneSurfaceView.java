@@ -1,11 +1,11 @@
-package view;
+package lanou.mojiweather.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import utils.RenderThread;
+import lanou.mojiweather.utils.RenderThread;
 
 
 public class SceneSurfaceView extends SurfaceView implements SurfaceHolder.Callback {

@@ -1,4 +1,4 @@
-package model;
+package lanou.mojiweather.model;
 
 import android.content.Context;
 import android.graphics.Canvas;

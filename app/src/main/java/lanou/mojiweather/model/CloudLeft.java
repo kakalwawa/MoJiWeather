@@ -1,4 +1,4 @@
-package model;
+package lanou.mojiweather.model;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -6,11 +6,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.util.Log;
 
 import lanou.mojiweather.R;
 
 
-public class SunShine extends Actor {
+public class CloudLeft extends Actor {
 
     float initPositionX;
     float initPositionY;
@@ -19,10 +20,8 @@ public class SunShine extends Actor {
     RectF box;
     RectF targetBox;
     Paint paint = new Paint();
-    int alpha;
-    boolean alphaUp = true;
 
-    public SunShine(Context context) {
+    public CloudLeft(Context context) {
         super(context);
         box = new RectF();
         targetBox = new RectF();
@@ -34,9 +33,10 @@ public class SunShine extends Actor {
         //逻辑处理
         //初始化
         if (!isInit) {
-            initPositionX = width * 0.275F;
-            initPositionY = height * 0.365F;
-            frame = BitmapFactory.decodeResource(context.getResources(), R.mipmap.sunshine);
+            Log.d("weather", "cloud init");
+            initPositionX = width * 0.039F;
+            initPositionY = height * 0.69F;
+            frame = BitmapFactory.decodeResource(context.getResources(), R.mipmap.fine_day_cloud1);
             box.set(0, 0, frame.getWidth(), frame.getHeight());
             matrix.reset();
             matrix.setScale(2f, 2f);
@@ -45,22 +45,13 @@ public class SunShine extends Actor {
             isInit = true;
             return;
         }
-        //旋转
+        //移动
+        matrix.postTranslate(0.5F, 0);
+        //边界处理
         matrix.mapRect(targetBox, box);
-        matrix.postRotate(0.5F, targetBox.centerX(), targetBox.centerY());
-        //透明度变化
-        if (alphaUp) {
-            alpha++;
-        } else {
-            alpha--;
+        if (targetBox.left > width) {
+            matrix.postTranslate(-targetBox.right, 0);
         }
-        if (alpha >= 255) {
-            alphaUp = false;
-        }
-        if (alpha <= 0) {
-            alphaUp = true;
-        }
-        paint.setAlpha(alpha);
         //绘制
         canvas.drawBitmap(frame, matrix, paint);
     }

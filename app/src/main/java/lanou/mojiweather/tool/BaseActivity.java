@@ -1,4 +1,4 @@
-package tool;
+package lanou.mojiweather.tool;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

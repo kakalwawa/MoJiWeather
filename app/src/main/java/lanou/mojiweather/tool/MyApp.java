@@ -1,4 +1,4 @@
-package tool;
+package lanou.mojiweather.tool;
 
 import android.app.Application;
 import android.content.Context;

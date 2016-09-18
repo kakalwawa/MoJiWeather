@@ -1,4 +1,4 @@
-package utils;
+package lanou.mojiweather.utils;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
@@ -10,12 +10,12 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 
 import lanou.mojiweather.R;
-import model.BirdDown;
-import model.BirdUp;
-import model.CloudLeft;
-import model.CloudRight;
-import model.Scene;
-import model.SunShine;
+import lanou.mojiweather.model.BirdDown;
+import lanou.mojiweather.model.BirdUp;
+import lanou.mojiweather.model.CloudLeft;
+import lanou.mojiweather.model.CloudRight;
+import lanou.mojiweather.model.Scene;
+import lanou.mojiweather.model.SunShine;
 
 
 public class RenderThread extends Thread {

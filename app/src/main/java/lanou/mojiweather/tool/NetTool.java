@@ -1,15 +1,19 @@
-package tool;
+package lanou.mojiweather.tool;
 
 import android.os.Handler;
 import android.os.Looper;
 
 import com.google.gson.Gson;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.MediaType;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 /**
@@ -35,6 +39,7 @@ public class NetTool {
     }
 
     public <T> void getData(final String url, final Class<T> tClass, final ResponseListenner<T> responseListenner) throws IOException {
+
         Request request = new Request.Builder()
                 .url(url)
                 .build();
@@ -49,6 +54,27 @@ public class NetTool {
                 //请求回来的数据,都在response.body里
                 //虽然网络请求是回调的,但是!!!
                 //它还是在子线程回调,想要用还得写handler 回调回主线程
+                Gson gson = new Gson();
+                final T t = gson.fromJson(response.body().string(), tClass);
+                mHandler.post(new HandlerRunnable<T>(t, responseListenner));
+            }
+        });
+    }
+    public <T> void getPost(final String url, final Class<T> tClass, final ResponseListenner<T> responseListenner ,String json) throws IOException {
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        RequestBody body = RequestBody.create(JSON ,json);
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+        OkHttpSingleTon.getInstance().getClient().newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
                 Gson gson = new Gson();
                 final T t = gson.fromJson(response.body().string(), tClass);
                 mHandler.post(new HandlerRunnable<T>(t, responseListenner));

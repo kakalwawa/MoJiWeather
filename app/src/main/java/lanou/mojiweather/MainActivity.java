@@ -9,8 +9,7 @@ import android.widget.RadioGroup;
 import lanou.mojiweather.background.fragment.BackgroundFragment;
 import lanou.mojiweather.me.fragment.MeFragment;
 import lanou.mojiweather.weather.fragment.WeatherFragment;
-import tool.BaseActivity;
-
+import lanou.mojiweather.tool.BaseActivity;
 
 public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
     private RadioButton rbWeather;

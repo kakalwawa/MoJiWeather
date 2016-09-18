@@ -1,10 +1,13 @@
-package tool;
+package lanou.mojiweather.tool;
 
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
 
 /**
  * Created by 高翔 on 16/9/13.
@@ -58,5 +61,10 @@ public class CommonViewHolder {
     public void setTex (int id , String text){
         TextView textView = getView(id);
         textView.setText(text);
+    }
+
+    public void setImage(int id , String url ){
+        ImageView imageView = getView(id);
+        Glide.with(MyApp.getContext()).load(url).into(imageView);
     }
 }

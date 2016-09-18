@@ -1,4 +1,4 @@
-package view;
+package lanou.mojiweather.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -11,8 +11,8 @@ import android.view.View;
 import java.util.ArrayList;
 
 import lanou.mojiweather.R;
-import model.ChartItem;
-import utils.Utils;
+import lanou.mojiweather.model.ChartItem;
+import lanou.mojiweather.utils.Utils;
 
 
 /**

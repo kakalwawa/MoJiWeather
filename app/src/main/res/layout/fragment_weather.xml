@@ -105,5 +105,56 @@
                 android:clickable="true"
                 />
                 </RelativeLayout>
+
     </lanou.mojiweather.tool.MyScrollView>
+    <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    android:id="@+id/select_rl"
+    android:background="#83151313"
+    >
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:orientation="horizontal"
+    android:background="#d00d0303"
+    android:id="@+id/ll_select_icon"
+    android:layout_alignParentBottom="true"
+    >
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginTop="10dp"
+    android:layout_width="0sp"
+    android:layout_weight="1"
+    android:layout_height="35dp"
+    android:src="@mipmap/dlamwm"
+        android:id="@+id/icon_first"
+    />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginTop="10dp"
+    android:layout_width="0sp"
+    android:layout_weight="1"
+    android:layout_height="35dp"
+    android:src="@mipmap/dldtwo"
+        android:id="@+id/icon_second"
+    />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginTop="10dp"
+    android:layout_width="0sp"
+    android:layout_weight="1"
+    android:layout_height="35dp"
+    android:src="@mipmap/four"
+        android:id="@+id/icon_three"
+    />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginTop="10dp"
+    android:layout_width="0sp"
+    android:layout_weight="1"
+    android:layout_height="35dp"
+    android:src="@mipmap/five"
+        android:id="@+id/icon_four"
+    />
+    </LinearLayout>
+
+    </RelativeLayout>
 </RelativeLayout>

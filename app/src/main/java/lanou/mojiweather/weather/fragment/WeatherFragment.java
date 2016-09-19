@@ -1,7 +1,13 @@
 package lanou.mojiweather.weather.fragment;
 
+import android.content.ContentResolver;
+import android.database.Cursor;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
+import android.os.Handler;
+import android.os.Message;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -10,8 +16,13 @@ import android.view.animation.AnimationSet;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 import lanou.mojiweather.R;
 
 import lanou.mojiweather.tool.BaseFragment;
@@ -22,7 +33,7 @@ import lanou.mojiweather.view.SceneSurfaceView;
  * Created by 高翔 on 16/9/13.
  */
 public class WeatherFragment extends BaseFragment implements View.OnClickListener {
-
+    private boolean isclick ;
     private SceneSurfaceView surfaceView;
     private MyScrollView scrollView;
     private static final int START_ALPHA = 0;
@@ -33,6 +44,13 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
     private ImageView iv , voice;
     private AnimationSet as;
     private AnimationDrawable drawable1;
+    private MediaPlayer mediaPlayer;
+    private ContentResolver contentResolver;
+    private Handler handler;
+    private ArrayList<MusicBean> arrayList;
+    private ImageView icon;
+    private RelativeLayout rv;
+    private CircleImageView iconFrist , iconSecond , iconThird , iconFourth;
 
     @Override
     protected int setLayout() {
@@ -45,10 +63,23 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
         surfaceView = (SceneSurfaceView) getView().findViewById(R.id.weather_scene);
         scrollView = (MyScrollView) getView().findViewById(R.id.scrollView_weather);
         linearLayout = (LinearLayout) getView().findViewById(R.id.weather_title_ll);
+        iconFrist = (CircleImageView) getView().findViewById(R.id.icon_first);
+        iconSecond = (CircleImageView) getView().findViewById(R.id.icon_second);
+        iconThird = (CircleImageView) getView().findViewById(R.id.icon_three);
+        iconFourth = (CircleImageView) getView().findViewById(R.id.icon_four);
+        rv = (RelativeLayout) getView().findViewById(R.id.select_rl);
         iv = (ImageView) getView().findViewById(R.id.iv_leida);
+        icon = (ImageView) getView().findViewById(R.id.iv_icon);
         voice = (ImageView) getView().findViewById(R.id.voice_animation);
         voice.setOnClickListener(this);
+        icon.setOnClickListener(this);
+        iconFrist.setOnClickListener(this);
+        iconSecond.setOnClickListener(this);
+        iconThird.setOnClickListener(this);
+        iconFourth.setOnClickListener(this);
+        rv.setOnClickListener(this);
         drawable1 = (AnimationDrawable) voice.getBackground();
+        contentResolver = this.getActivity().getContentResolver();
     }
 
     @Override
@@ -83,6 +114,19 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
         super.onResume();
         surfaceView.resume();
         iv.startAnimation(as);
+        handler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                if (msg.what == 1 ){
+                    arrayList = (ArrayList<MusicBean>) msg.obj;
+                    Log.d("WeatherFragment", "arrayList.size():" + arrayList.size());
+                }
+                return false;
+            }
+        });
+        MusicThread musicThread = new MusicThread( handler ,contentResolver);
+        Thread thread = new Thread(musicThread);
+        thread.start();
     }
 
     private MyScrollView.OnScrollChangedListener scrollChangedListener = new MyScrollView.OnScrollChangedListener() {
@@ -102,8 +146,54 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
      */
     @Override
     public void onClick(View v) {
-      drawable1.start();
-        Log.d("WeatherFragment", "点你了");
+        switch (v.getId()) {
+            case R.id.voice_animation:
+                if( isclick ){
+                    drawable1.stop();
+                    mediaPlayer.stop();
+                    isclick = false ;
+
+                }else {
+                    drawable1.start();
+                    mediaPlayer = new MediaPlayer();
+                    try {
+                        mediaPlayer.setDataSource(arrayList.get(0).getPath());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    try {
+                        mediaPlayer.prepare();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    mediaPlayer.start();
+                    isclick = true ;
+                }
+
+                break;
+            case R.id.iv_icon:
+                rv.setVisibility(View.VISIBLE);
+                break;
+            case R.id.icon_first:
+                icon.setImageResource(R.mipmap.dlamwm);
+                rv.setVisibility(View.GONE);
+                break;
+            case R.id.icon_second:
+                icon.setImageResource(R.mipmap.dldtwo);
+                rv.setVisibility(View.GONE);
+                break;
+            case R.id.icon_three:
+                icon.setImageResource(R.mipmap.three);
+                rv.setVisibility(View.GONE);
+                break;
+            case R.id.icon_four:
+                icon.setImageResource(R.mipmap.four);
+                rv.setVisibility(View.GONE);
+                break;
+            case R.id.select_rl :
+                rv.setVisibility(View.GONE);
+                break;
+        }
 
     }
 }

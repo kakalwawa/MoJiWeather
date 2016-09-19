@@ -1,4 +1,4 @@
-package view;
+package lanou.mojiweather.view;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -45,7 +45,7 @@ public class UserInfoView extends RelativeLayout {
         super(context, attrs, defStyleAttr);
 
         LayoutInflater.from(context).inflate(R.layout.widget_userinfo, this);
-        setBackgroundResource(R.mipmap.personal_back);
+        setBackgroundResource(R.mipmap.bluewater_bg);
 
         initView();
     }
@@ -53,9 +53,10 @@ public class UserInfoView extends RelativeLayout {
     void initView() {
         mRl_center = (RelativeLayout) findViewById(R.id.BM_Ll_mine_center);
         mTv_username = (TextView) findViewById(R.id.BM_Tv_mine_username);
-        mIv_head = (ImageView) findViewById(R.id.BM_Iv_mine_head);
+        mIv_head = (ImageView) findViewById(R.id.BM_Iv_mine_head);//头像
         mTv_username_top = (TextView) findViewById(R.id.BM_Tv_mine_username_top);
-        mIv_share = (ImageView) findViewById(R.id.BM_Iv_mine_share);
+        mIv_share = (ImageView) findViewById(R.id.BM_Iv_mine_share);//消息
+
 
         getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -74,7 +75,12 @@ public class UserInfoView extends RelativeLayout {
         MAX_RANGE = maxRange;
     }
 
+    /**
+     * 中间过程动画处理
+     * @param range
+     */
     public void onChange(int range) {
+
         mRange = range * STANDARD_RANGE / MAX_RANGE;
 
         if (mRange <= HEAD_GONE_VALUE) {
@@ -87,8 +93,8 @@ public class UserInfoView extends RelativeLayout {
             mRl_center.setScaleX((1 - scale)*0.3f+0.7f);
             mRl_center.setScaleY((1 - scale)*0.3f+0.7f);
 
-            mTv_username.setScaleX(1-scale);
-            mTv_username.setScaleY(1-scale);
+//            mTv_username.setScaleX(1-scale);
+//            mTv_username.setScaleY(1-scale);
         } else {
             mRl_center.setVisibility(INVISIBLE);
         }

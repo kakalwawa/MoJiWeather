@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <view.MyScrollView
+    <lanou.mojiweather.view.ShiScrollView
         android:id="@+id/my_scrollview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <LinearLayout
-            android:paddingTop="200dp"
+            android:paddingTop="300dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <LinearLayout
                 android:id="@+id/my_position_linearlayout"
@@ -290,18 +291,16 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="80dp"
                 android:layout_marginTop="10dp"
                 android:background="#cecece" />
         </LinearLayout>
+    </lanou.mojiweather.view.ShiScrollView>
 
 
-    </view.MyScrollView>
-
-
-    <view.UserInfoView
+    <lanou.mojiweather.view.UserInfoView
         android:id="@+id/userInfoView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"></view.UserInfoView>
+        android:layout_height="200dp"></lanou.mojiweather.view.UserInfoView>
 
 </RelativeLayout>

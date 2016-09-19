@@ -2,6 +2,7 @@ package lanou.mojiweather.tool;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -44,7 +45,7 @@ public class NetTool {
         OkHttpSingleTon.getInstance().getClient().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
+                Log.d("NetTool", "dddd");
             }
 
             @Override

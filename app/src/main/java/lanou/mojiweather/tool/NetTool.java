@@ -5,8 +5,6 @@ import android.os.Looper;
 
 import com.google.gson.Gson;
 
-import org.json.JSONObject;
-
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -70,7 +68,6 @@ public class NetTool {
         OkHttpSingleTon.getInstance().getClient().newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-
             }
 
             @Override

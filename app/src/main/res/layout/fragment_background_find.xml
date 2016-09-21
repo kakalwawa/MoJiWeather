@@ -3,11 +3,77 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-    android:background="#00ff00">
-    <ImageView
+    >
+    <lanou.mojiweather.background.fragment.GoTopScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/ic_launcher"
+        android:id="@+id/scroll_view_find"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@mipmap/autumn"
+                />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                >
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/fire"
+                    android:id="@+id/iv_fire"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="小墨推荐"
+                    android:textSize="20sp"
+                    android:layout_toRightOf="@+id/iv_fire"
+                    android:layout_margin="7dp"
+                    />
+            </RelativeLayout>
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/recyclerview_background_find"
+                />
+
+
+
+        </LinearLayout>
+    </lanou.mojiweather.background.fragment.GoTopScrollView>
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/to_top"
+        android:id="@+id/go_top_btn_find"
+        android:layout_marginTop="-100dp"
+        android:layout_marginLeft="300dp"
+        android:visibility="gone"
         />
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@mipmap/camara"
+        android:id="@+id/iv_camara_find"
+        android:layout_marginTop="-100dp"
+        android:layout_marginLeft="160dp"
+        />
+    <FrameLayout
+        android:id="@+id/pop_frame_layout_pick_pic_find"
+        android:layout_width="match_parent"
+        android:layout_height="144dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-92dp"
+        android:visibility="gone">
+        <include layout="@layout/pop_pick_pic"/>
+    </FrameLayout>
 
 </LinearLayout>

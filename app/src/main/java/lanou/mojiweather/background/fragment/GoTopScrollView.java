@@ -22,6 +22,7 @@ public class GoTopScrollView extends ScrollView implements OnClickListener {
     public void setScrollListener(ImageView goTopBtn){
         this.goTopBtn = goTopBtn;
         this.goTopBtn.setOnClickListener(this);
+
     }
 
     @Override
@@ -37,7 +38,7 @@ public class GoTopScrollView extends ScrollView implements OnClickListener {
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.go_top_btn){
+        if (view.getId() == R.id.go_top_btn || view.getId() == R.id.go_top_btn_find){
             this.smoothScrollTo(0,0);
         }
 

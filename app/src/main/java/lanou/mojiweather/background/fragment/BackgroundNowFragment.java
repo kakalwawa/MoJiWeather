@@ -1,25 +1,32 @@
 package lanou.mojiweather.background.fragment;
+import android.content.ContentResolver;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
+import android.provider.MediaStore;
+import android.provider.MediaStore.Images.Media;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.View.OnClickListener;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import java.io.IOException;
+import android.widget.TextView;
 
-import lanou.mojiweather.BuildConfig;
+import java.io.IOException;
 import lanou.mojiweather.R;
-import tool.BaseFragment;
-import tool.NetTool;
-import tool.NetTool.ResponseListenner;
+import lanou.mojiweather.tool.BaseFragment;
+import lanou.mojiweather.tool.NetTool;
+import lanou.mojiweather.tool.NetTool.ResponseListenner;
+
 /**
  * Created by dllo on 16/9/14.
  */
@@ -33,12 +40,16 @@ public class BackgroundNowFragment extends BaseFragment {
     private RecyclerView worldRecyclerView;
     private RecyclerVIewAdapter recyclerViewAdapter;
     public static final String TURNPICURL = "https://rong.36kr.com/api/mobi/roundpics/v4";
-    public static final String RECYCLERVIEWURL = "http://www.koubeilvxing.com/search?lang=zh&lat=0.000000&lng=0.000000&module=attraction&page=1&placeId=0&rows=10";
+    public static final String RECYCLERVIEWURL = "http://www.koubeilvxing.com/search?lang=zh&lat=0.000000&lng=0.000000&module=attraction&page=1&placeId=0&rows=20";
     private Handler handler;
     private RecyclerViewWorldAdapter recyclerViewWorldAdapter;
     private ImageView goTopBtn;
     private GoTopScrollView goTopScrollView;
-
+    private ImageView CamaraimageView;
+    private FrameLayout frameLayoutPickPic;
+    private TextView textViewPickPicCancel;
+    private TextView textViewPickFromPics;
+    private TextView textViewTakePhoto;
     @Override
     protected int setLayout() {
         return R.layout.fragment_background_now;
@@ -46,6 +57,11 @@ public class BackgroundNowFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        CamaraimageView = (ImageView) getView().findViewById(R.id.iv_camara);
+        frameLayoutPickPic = (FrameLayout) getView().findViewById(R.id.pop_frame_layout_pick_pic);
+        textViewPickPicCancel = (TextView) getView().findViewById(R.id.tv_pick_pic_cancel);
+        textViewPickFromPics = (TextView) getView().findViewById(R.id.tv_pick_from_pics);
+        textViewTakePhoto = (TextView) getView().findViewById(R.id.tv_camera);
         recyclerViewAdapter = new RecyclerVIewAdapter(this.getActivity());
         recyclerView = (RecyclerView) getView().findViewById(R.id.recyclerview_background_now);
         GridLayoutManager manager = new GridLayoutManager(getActivity(),2);
@@ -150,7 +166,52 @@ public class BackgroundNowFragment extends BaseFragment {
             e.printStackTrace();
         }
         goTopScrollView.setScrollListener(goTopBtn);
+        //点击相机获取图库照片
+        CamaraimageView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                frameLayoutPickPic.setVisibility(View.VISIBLE);
+            }
+        });
+        textViewPickPicCancel.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                frameLayoutPickPic.setVisibility(View.GONE);
+            }
+        });
+        textViewPickFromPics.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                //动作  选择
+                intent.setAction(intent.ACTION_PICK);
+                //通过URI 指定跳转到系统图库
+                intent.setData(Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent,101);
+                frameLayoutPickPic.setVisibility(View.GONE);
+            }
+        });
+        textViewTakePhoto.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent,1);
+            }
+        });
 
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 101 && resultCode == getActivity().RESULT_OK){
+            Uri uri = data.getData();
+            ContentResolver cr = this.getActivity().getContentResolver();
+            Cursor cursor = cr.query(uri,null,null,null,null);
+            if (cursor != null && cursor.moveToFirst()){
+                String path = cursor.getString(cursor.getColumnIndex(Media.DATA));
+
+            }
+        }
+    }
 }

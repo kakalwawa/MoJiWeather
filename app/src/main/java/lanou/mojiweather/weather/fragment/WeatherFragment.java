@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -60,6 +61,19 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
     private SharedPreferences shared;
     private int i;
     private LineChartViewDouble lineChart;
+    private TextView dayOne;
+    private TextView dayTwo;
+    private TextView dayThree;
+    private TextView dayFour;
+    private TextView dayFive;
+    private TextView daySix;
+    private TextView dateOne;
+    private TextView dateTwo;
+    private TextView dateThree;
+    private TextView dateFour;
+    private TextView dateFive;
+    private TextView dateSix;
+
     @Override
     protected int setLayout() {
         return R.layout.fragment_weather;
@@ -89,7 +103,19 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
         drawableAd = (AnimationDrawable) voice.getBackground();
         contentResolver = this.getActivity().getContentResolver();
         lineChart = (LineChartViewDouble) getView().findViewById(R.id.temp_customview);
-
+        dayOne = (TextView) getView().findViewById(R.id.day_one);
+        dayTwo = (TextView) getView().findViewById(R.id.day_two);
+        dayThree = (TextView) getView().findViewById(R.id.day_three);
+        dayFour = (TextView) getView().findViewById(R.id.day_four);
+        dayFive = (TextView) getView().findViewById(R.id.day_five);
+        daySix = (TextView) getView().findViewById(R.id.day_six);
+        dateOne = (TextView) getView().findViewById(R.id.date_one);
+        dateTwo = (TextView) getView().findViewById(R.id.date_two);
+        dateThree = (TextView) getView().findViewById(R.id.date_three);
+        dateFour = (TextView) getView().findViewById(R.id.date_four);
+        dateFive = (TextView) getView().findViewById(R.id.date_five);
+        dateSix = (TextView) getView().findViewById(R.id.date_six);
+      
     }
 
     @Override

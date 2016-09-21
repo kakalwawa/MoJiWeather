@@ -89,6 +89,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="今天"
+                        android:id="@+id/day_one"
                         android:gravity="center"
                         />
                     <TextView
@@ -97,6 +98,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="今天"
+                        android:id="@+id/day_two"
                         android:gravity="center"
                         />
                     <TextView
@@ -105,6 +107,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="今天"
+                        android:id="@+id/day_three"
                         android:gravity="center"
                         />
                     <TextView
@@ -113,6 +116,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="今天"
+                        android:id="@+id/day_four"
                         android:gravity="center"
                         />
                     <TextView
@@ -121,6 +125,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="今天"
+                        android:id="@+id/day_five"
                         android:gravity="center"
                         />
                     <TextView
@@ -129,6 +134,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="今天"
+                        android:id="@+id/day_six"
                         android:gravity="center"
                         />
                 </LinearLayout>
@@ -144,6 +150,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="09/20"
+                        android:id="@+id/date_one"
                         android:gravity="center"
                         />
                     <TextView
@@ -152,6 +159,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="09/20"
+                        android:id="@+id/date_two"
                         android:gravity="center"
                         />
                     <TextView
@@ -160,6 +168,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="09/20"
+                        android:id="@+id/date_three"
                         android:gravity="center"
                         />
                     <TextView
@@ -168,6 +177,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="09/20"
+                        android:id="@+id/date_four"
                         android:gravity="center"
                         />
                     <TextView
@@ -176,6 +186,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="09/20"
+                        android:id="@+id/date_five"
                         android:gravity="center"
                         />
                     <TextView
@@ -184,6 +195,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="09/20"
+                        android:id="@+id/date_six"
                         android:gravity="center"
                         />
                 </LinearLayout>
@@ -199,6 +211,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="晴"
+                        android:id="@+id/weather_one"
                         android:gravity="center"
                         />
                     <TextView
@@ -207,6 +220,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="晴"
+                        android:id="@+id/weather_two"
                         android:gravity="center"
                         />
                     <TextView
@@ -215,6 +229,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="晴"
+                        android:id="@+id/weather_three"
                         android:gravity="center"
                         />
                     <TextView
@@ -223,6 +238,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="晴"
+                        android:id="@+id/weather_four"
                         android:gravity="center"
                         />
                     <TextView
@@ -231,6 +247,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="晴"
+                        android:id="@+id/weather_five"
                         android:gravity="center"
                         />
                     <TextView
@@ -239,6 +256,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="晴"
+                        android:id="@+id/weather_six"
                         android:gravity="center"
                         />
                 </LinearLayout>
@@ -253,6 +271,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:src="@mipmap/a"
+                        android:id="@+id/weathericon_one"
                         android:scaleType="fitXY"
                         />
                     <ImageView
@@ -260,6 +279,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:src="@mipmap/a"
+                        android:id="@+id/weathericon_two"
                         android:scaleType="fitXY"
                         />
                     <ImageView
@@ -267,6 +287,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:src="@mipmap/a"
+                        android:id="@+id/weathericon_three"
                         android:scaleType="fitXY"
                         />
                     <ImageView
@@ -274,6 +295,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:src="@mipmap/a"
+                        android:id="@+id/weathericon_four"
                         android:scaleType="fitXY"
                         />
                     <ImageView
@@ -281,6 +303,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:src="@mipmap/a"
+                        android:id="@+id/weathericon_five"
                         android:scaleType="fitXY"
                         />
                     <ImageView
@@ -288,6 +311,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:src="@mipmap/a"
+                        android:id="@+id/weathericon_six"
                         android:scaleType="fitXY"
                         />
                 </LinearLayout>
@@ -306,6 +330,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:src="@mipmap/a"
+                        android:id="@+id/weathernight_icon_one"
                         android:scaleType="fitXY"
                         />
                     <ImageView
@@ -313,6 +338,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:src="@mipmap/a"
+                        android:id="@+id/weathernight_icon_two"
                         android:scaleType="fitXY"
                         />
                     <ImageView
@@ -320,6 +346,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:src="@mipmap/a"
+                        android:id="@+id/weathernight_icon_three"
                         android:scaleType="fitXY"
                         />
                     <ImageView
@@ -327,6 +354,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:src="@mipmap/a"
+                        android:id="@+id/weathernight_icon_four"
                         android:scaleType="fitXY"
                         />
                     <ImageView
@@ -334,6 +362,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:src="@mipmap/a"
+                        android:id="@+id/weathernight_icon_five"
                         android:scaleType="fitXY"
                         />
                     <ImageView
@@ -341,6 +370,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:src="@mipmap/a"
+                        android:id="@+id/weathernight_icon_six"
                         android:scaleType="fitXY"
                         />
                 </LinearLayout>
@@ -356,6 +386,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="晴"
+                        android:id="@+id/weather_night_one"
                         android:gravity="center"
                         />
                     <TextView
@@ -364,6 +395,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="晴"
+                        android:id="@+id/weather_night_two"
                         android:gravity="center"
                         />
                     <TextView
@@ -372,6 +404,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="晴"
+                        android:id="@+id/weather_night_three"
                         android:gravity="center"
                         />
                     <TextView
@@ -380,6 +413,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="晴"
+                        android:id="@+id/weather_night_four"
                         android:gravity="center"
                         />
                     <TextView
@@ -388,6 +422,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="晴"
+                        android:id="@+id/weather_night_five"
                         android:gravity="center"
                         />
                     <TextView
@@ -396,6 +431,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="晴"
+                        android:id="@+id/weather_night_six"
                         android:gravity="center"
                         />
                 </LinearLayout>
@@ -411,6 +447,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="09/20"
+                        android:id="@+id/wind_one"
                         android:gravity="center"
                         />
                     <TextView
@@ -419,6 +456,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="09/20"
+                        android:id="@+id/wind_two"
                         android:gravity="center"
                         />
                     <TextView
@@ -427,6 +465,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="09/20"
+                        android:id="@+id/wind_three"
                         android:gravity="center"
                         />
                     <TextView
@@ -435,6 +474,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="09/20"
+                        android:id="@+id/wind_four"
                         android:gravity="center"
                         />
                     <TextView
@@ -443,6 +483,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="09/20"
+                        android:id="@+id/wind_five"
                         android:gravity="center"
                         />
                     <TextView
@@ -451,6 +492,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="09/20"
+                        android:id="@+id/wind_six"
                         android:gravity="center"
                         />
                 </LinearLayout>
@@ -466,6 +508,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="今天"
+                        android:id="@+id/speed_one"
                         android:gravity="center"
                         />
                     <TextView
@@ -474,6 +517,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="今天"
+                        android:id="@+id/speed_two"
                         android:gravity="center"
                         />
                     <TextView
@@ -482,6 +526,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="今天"
+                        android:id="@+id/speed_three"
                         android:gravity="center"
                         />
                     <TextView
@@ -490,6 +535,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="今天"
+                        android:id="@+id/speed_four"
                         android:gravity="center"
                         />
                     <TextView
@@ -498,6 +544,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="今天"
+                        android:id="@+id/speed_five"
                         android:gravity="center"
                         />
                     <TextView
@@ -506,6 +553,7 @@
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
                         android:text="今天"
+                        android:id="@+id/speed_six"
                         android:gravity="center"
                         />
                 </LinearLayout>

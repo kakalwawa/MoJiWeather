@@ -79,6 +79,44 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
     private TextView weatherFour;
     private TextView weatherFive;
     private TextView weatherSix;
+    private TextView[] days;
+    private TextView[] dates;
+    private TextView[] weathers;
+    private ImageView weatherIconOne;
+    private ImageView weatherIconTwo;
+    private ImageView weatherIconThree;
+    private ImageView weatherIconFour;
+    private ImageView weatherIconFive;
+    private ImageView weatherIconSix;
+    private ImageView[] weatherIcons;
+    private TextView weatherNightOne;
+    private TextView weatherNightTwo;
+    private TextView weatherNightThree;
+    private TextView weatherNightFour;
+    private TextView weatherNightFive;
+    private TextView weatherNightSix;
+    private TextView[] weatherNights;
+    private TextView windOne;
+    private TextView windTwo;
+    private TextView windThree;
+    private TextView windFour;
+    private TextView windFive;
+    private TextView windSix;
+    private TextView[] winds;
+    private TextView windSpeedOne;
+    private TextView windSpeedTwo;
+    private TextView windSpeedThree;
+    private TextView windSpeedFour;
+    private TextView windSpeedFive;
+    private TextView windSpeedSix;
+    private TextView[] speeds;
+    private ImageView weatherNightIconOne;
+    private ImageView weatherNightIconTwo;
+    private ImageView weatherNightIconThree;
+    private ImageView weatherNightIconFour;
+    private ImageView weatherNightIconFive;
+    private ImageView weatherNightIconSix;
+    private ImageView[] weatherNightIcons;
 
     @Override
     protected int setLayout() {
@@ -127,8 +165,45 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
         weatherFour = (TextView) getView().findViewById(R.id.weather_four);
         weatherFive = (TextView) getView().findViewById(R.id.weather_five);
         weatherSix = (TextView) getView().findViewById(R.id.weather_six);
-
-
+        weatherNightOne = (TextView) getView().findViewById(R.id.weather_night_one);
+        weatherNightTwo = (TextView) getView().findViewById(R.id.weather_night_two);
+        weatherNightThree = (TextView) getView().findViewById(R.id.weather_night_three);
+        weatherNightFour = (TextView) getView().findViewById(R.id.weather_night_four);
+        weatherNightFive = (TextView) getView().findViewById(R.id.weather_night_five);
+        weatherNightSix = (TextView) getView().findViewById(R.id.weather_night_six);
+        weatherNights = new TextView[]{weatherNightOne ,weatherNightTwo , weatherNightThree , weatherNightFour , weatherNightFive ,
+                weatherNightSix};
+        windOne = (TextView) getView().findViewById(R.id.wind_one);
+        windTwo = (TextView) getView().findViewById(R.id.wind_two);
+        windThree = (TextView) getView().findViewById(R.id.wind_three);
+        windFour = (TextView) getView().findViewById(R.id.wind_four);
+        windFive = (TextView) getView().findViewById(R.id.wind_five);
+        windSix = (TextView) getView().findViewById(R.id.wind_six);
+        windSpeedOne = (TextView) getView().findViewById(R.id.speed_one);
+        windSpeedTwo = (TextView) getView().findViewById(R.id.speed_two);
+        windSpeedThree = (TextView) getView().findViewById(R.id.speed_three);
+        windSpeedFour = (TextView) getView().findViewById(R.id.speed_four);
+        windSpeedFive = (TextView) getView().findViewById(R.id.speed_five);
+        windSpeedSix = (TextView) getView().findViewById(R.id.speed_six);
+        speeds = new TextView[]{windSpeedOne ,windSpeedTwo ,windSpeedThree , windSpeedFour ,windSpeedFive ,windSpeedSix};
+        winds = new TextView[]{windOne ,windTwo , windThree ,windFour ,windFive ,windSix};
+        days = new TextView[]{dayOne , dayTwo , dayThree , dayFour , dayFive , daySix};
+        dates = new TextView[]{dateOne , dateTwo , dateThree , dateFour , dateFive , dateSix};
+        weathers = new TextView[]{weatherOne , weatherTwo , weatherThree ,weatherFour ,weatherFive ,weatherSix};
+        weatherIconOne = (ImageView) getView().findViewById(R.id.weathericon_one);
+        weatherIconTwo = (ImageView) getView().findViewById(R.id.weathericon_two);
+        weatherIconThree = (ImageView) getView().findViewById(R.id.weathericon_three);
+        weatherIconFour = (ImageView) getView().findViewById(R.id.weathericon_four);
+        weatherIconFive = (ImageView) getView().findViewById(R.id.weathericon_five);
+        weatherIconSix = (ImageView) getView().findViewById(R.id.weathericon_six);
+        weatherIcons = new ImageView[]{weatherIconOne ,weatherIconTwo , weatherIconThree , weatherIconFour ,weatherIconFive , weatherIconSix};
+        weatherNightIconOne = (ImageView) getView().findViewById(R.id.weathernight_icon_one);
+        weatherNightIconTwo = (ImageView) getView().findViewById(R.id.weathernight_icon_two);
+        weatherNightIconThree = (ImageView) getView().findViewById(R.id.weathernight_icon_three);
+        weatherNightIconFour = (ImageView) getView().findViewById(R.id.weathernight_icon_four);
+        weatherNightIconFive = (ImageView) getView().findViewById(R.id.weathernight_icon_five);
+        weatherNightIconSix = (ImageView) getView().findViewById(R.id.weathernight_icon_six);
+        weatherNightIcons = new ImageView[]{weatherNightIconOne ,weatherNightIconTwo ,weatherNightIconThree,weatherNightIconFour,weatherNightIconFive,weatherNightIconSix};
     }
 
     @Override
@@ -142,6 +217,83 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
                     for (int i = 0; i <weatherBean.getResults().get(0).getDaily().size() ; i++) {
                         tempDay[i] = Integer.valueOf(weatherBean.getResults().get(0).getDaily().get(i).getHigh());
                         tempNight[i] = Integer.valueOf(weatherBean.getResults().get(0).getDaily().get(i).getLow());
+                        dates[i].setText(weatherBean.getResults().get(0).getDaily().get(i).getDate());
+                        weathers[i].setText(weatherBean.getResults().get(0).getDaily().get(i).getText_day());
+                        weatherNights[i].setText(weatherBean.getResults().get(0).getDaily().get(i).getText_night());
+                        winds[i].setText(weatherBean.getResults().get(0).getDaily().get(i).getWind_direction()+"风");
+                        speeds[i].setText(weatherBean.getResults().get(0).getDaily().get(i).getWind_speed()+"km/h");
+                        switch (Integer.valueOf(weatherBean.getResults().get(0).getDaily().get(i).getCode_day())) {
+                            case 0:
+                                weatherIcons[i].setImageResource(R.mipmap.sunny);
+                                break;
+                            case 2:
+                                weatherIcons[i].setImageResource(R.mipmap.fair);
+                                break;
+                            case 4:
+                                weatherIcons[i].setImageResource(R.mipmap.cloudy);
+                                break;
+                            case 5:
+                                weatherIcons[i].setImageResource(R.mipmap.partlycloudy);
+                                break;
+                            case 7:
+                                weatherIcons[i].setImageResource(R.mipmap.mostlycloudy);
+                                break;
+                            case 9:
+                                weatherIcons[i].setImageResource(R.mipmap.overcast);
+                                break;
+                            case 10:
+                                weatherIcons[i].setImageResource(R.mipmap.shower);
+                                break;
+                            case 22:
+                                weatherIcons[i].setImageResource(R.mipmap.snow);
+                                break;
+                            case 32:
+                                weatherIcons[i].setImageResource(R.mipmap.wind);
+                                break;
+                            case 30:
+                                weatherIcons[i].setImageResource(R.mipmap.fooggy);
+                                break;
+                            default:
+                                weatherIcons[i].setImageResource(R.mipmap.unkonw);
+                        }
+                        switch (Integer.valueOf(weatherBean.getResults().get(0).getDaily().get(i).getCode_night())) {
+                            case 0:
+                                weatherNightIcons[i].setImageResource(R.mipmap.clear);
+                                break;
+                            case 1:
+                                weatherNightIcons[i].setImageResource(R.mipmap.clear);
+                                break;
+                            case 3:
+                                weatherNightIcons[i].setImageResource(R.mipmap.fairnight);
+                                break;
+                            case 4:
+                                weatherNightIcons[i].setImageResource(R.mipmap.cloudy);
+                                break;
+                            case 6:
+                                weatherNightIcons[i].setImageResource(R.mipmap.partlycloudynight);
+                                break;
+                            case 8:
+                                weatherNightIcons[i].setImageResource(R.mipmap.mostlycloudynight);
+                                break;
+                            case 9:
+                                weatherNightIcons[i].setImageResource(R.mipmap.overcast);
+                                break;
+                            case 10:
+                                weatherNightIcons[i].setImageResource(R.mipmap.shower);
+                                break;
+                            case 22:
+                                weatherNightIcons[i].setImageResource(R.mipmap.snow);
+                                break;
+                            case 32:
+                                weatherNightIcons[i].setImageResource(R.mipmap.wind);
+                                break;
+                            case 30:
+                                weatherNightIcons[i].setImageResource(R.mipmap.fooggy);
+                                break;
+                            default:
+                            weatherNightIcons[i].setImageResource(R.mipmap.unkonw);
+                        }
+
                     }
 
                     lineChart.setTempDay(tempDay);
@@ -167,13 +319,13 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
         animation.setFillAfter(true);
         //开始动画f
         iv.startAnimation(animation);
-        RotateAnimation ra1 = new RotateAnimation(0, 360,
+        RotateAnimation rotateAnimation = new RotateAnimation(0, 360,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-        ra1.setDuration(2000);
-        ra1.setRepeatCount(0);
-        iv.startAnimation(ra1);
+        rotateAnimation.setDuration(2000);
+        rotateAnimation.setRepeatCount(0);
+        iv.startAnimation(rotateAnimation);
         as.addAnimation(animation);
-        as.addAnimation(ra1);
+        as.addAnimation(rotateAnimation);
     }
     @Override
     public void onResume() {

@@ -140,7 +140,7 @@
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_height="40dp"
                     android:background="#3f0e0d0d"
                     android:orientation="horizontal"
                     >
@@ -516,7 +516,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
-                        android:text="今天"
+                        android:text="明天"
                         android:id="@+id/speed_two"
                         android:gravity="center"
                         />
@@ -525,7 +525,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
-                        android:text="今天"
+                        android:text="后天"
                         android:id="@+id/speed_three"
                         android:gravity="center"
                         />
@@ -534,7 +534,7 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent"
                         android:textColor="@android:color/white"
-                        android:text="今天"
+                        android:text=""
                         android:id="@+id/speed_four"
                         android:gravity="center"
                         />
@@ -560,7 +560,7 @@
             </LinearLayout>
                 <lanou.mojiweather.tool.LineChartViewDouble
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="220dp"
                     android:id="@+id/temp_customview"
                     android:layout_marginTop="120dp"
                     android:layout_below="@id/iv_icon" />

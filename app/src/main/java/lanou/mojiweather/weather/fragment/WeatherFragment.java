@@ -1,6 +1,8 @@
 package lanou.mojiweather.weather.fragment;
 
 import android.content.ContentResolver;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
@@ -26,7 +28,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import lanou.mojiweather.R;
 
 import lanou.mojiweather.tool.BaseFragment;
+import lanou.mojiweather.tool.LineChartViewDouble;
 import lanou.mojiweather.tool.MyScrollView;
+import lanou.mojiweather.tool.NetTool;
+import lanou.mojiweather.tool.URLValues;
 import lanou.mojiweather.view.SceneSurfaceView;
 
 /**
@@ -37,13 +42,13 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
     private SceneSurfaceView surfaceView;
     private MyScrollView scrollView;
     private static final int START_ALPHA = 0;
-    private static final int END_ALPHA = 255;
+    private static final int END_ALPHA = 225;
     private int fadingHeight = 600;   //当ScrollView滑动到什么位置时渐变消失（根据需要进行调整）
     private Drawable drawable;        //顶部渐变布局需设置的Drawable
     private LinearLayout linearLayout;
     private ImageView iv , voice;
     private AnimationSet as;
-    private AnimationDrawable drawable1;
+    private AnimationDrawable drawableAd;
     private MediaPlayer mediaPlayer;
     private ContentResolver contentResolver;
     private Handler handler;
@@ -51,7 +56,10 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
     private ImageView icon;
     private RelativeLayout rv;
     private CircleImageView iconFrist , iconSecond , iconThird , iconFourth;
-
+    private SharedPreferences.Editor edit;
+    private SharedPreferences shared;
+    private int i;
+    private LineChartViewDouble lineChart;
     @Override
     protected int setLayout() {
         return R.layout.fragment_weather;
@@ -78,12 +86,33 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
         iconThird.setOnClickListener(this);
         iconFourth.setOnClickListener(this);
         rv.setOnClickListener(this);
-        drawable1 = (AnimationDrawable) voice.getBackground();
+        drawableAd = (AnimationDrawable) voice.getBackground();
         contentResolver = this.getActivity().getContentResolver();
+        lineChart = (LineChartViewDouble) getView().findViewById(R.id.temp_customview);
+
     }
 
     @Override
     protected void initData() {
+        try {
+            NetTool.getInstance().getData(URLValues.WEATHER, WeatherBean.class, new NetTool.ResponseListenner<WeatherBean>() {
+                @Override
+                public void onRespnseComplete(WeatherBean weatherBean) {
+                    int[]tempDay = new int[weatherBean.getResults().get(0).getDaily().size()];
+                    int[]tempNight = new int[weatherBean.getResults().get(0).getDaily().size()];
+                    for (int i = 0; i <weatherBean.getResults().get(0).getDaily().size() ; i++) {
+                        tempDay[i] = Integer.valueOf(weatherBean.getResults().get(0).getDaily().get(i).getHigh());
+                        tempNight[i] = Integer.valueOf(weatherBean.getResults().get(0).getDaily().get(i).getLow());
+                    }
+
+                    lineChart.setTempDay(tempDay);
+                    lineChart.setTempNight(tempNight);
+//                    Log.d("WeatherFragment", "weatherBean.getResults().get(0).getDaily().size():" + weatherBean.getResults().get(0).getDaily().size());
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         drawable = getResources().getDrawable(R.color.color_black);
         drawable.setAlpha(START_ALPHA);
         linearLayout.setBackground(drawable);
@@ -108,25 +137,29 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
         as.addAnimation(aa1);
         as.addAnimation(ra1);
     }
-
     @Override
     public void onResume() {
         super.onResume();
         surfaceView.resume();
         iv.startAnimation(as);
-        handler = new Handler(new Handler.Callback() {
-            @Override
-            public boolean handleMessage(Message msg) {
-                if (msg.what == 1 ){
-                    arrayList = (ArrayList<MusicBean>) msg.obj;
-                    Log.d("WeatherFragment", "arrayList.size():" + arrayList.size());
-                }
-                return false;
-            }
-        });
-        MusicThread musicThread = new MusicThread( handler ,contentResolver);
-        Thread thread = new Thread(musicThread);
-        thread.start();
+        String name ="lanou.mojiweather.SETTING";
+        shared = getContext().getSharedPreferences(name , Context.MODE_PRIVATE);
+        edit = shared.edit();
+        i = shared.getInt("icon" , 0);
+        switch (i) {
+            case 0:
+                icon.setImageResource(R.mipmap.dlamwm);
+                break;
+            case 1:
+                icon.setImageResource(R.mipmap.dldtwo);
+                break;
+            case 2:
+                icon.setImageResource(R.mipmap.three);
+                break;
+            case 3:
+                icon.setImageResource(R.mipmap.four);
+                break;
+        }
     }
 
     private MyScrollView.OnScrollChangedListener scrollChangedListener = new MyScrollView.OnScrollChangedListener() {
@@ -149,22 +182,26 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
         switch (v.getId()) {
             case R.id.voice_animation:
                 if( isclick ){
-                    drawable1.stop();
+                    drawableAd.stop();
                     mediaPlayer.stop();
                     isclick = false ;
 
                 }else {
-                    drawable1.start();
-                    mediaPlayer = new MediaPlayer();
-                    try {
-                        mediaPlayer.setDataSource(arrayList.get(0).getPath());
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    try {
-                        mediaPlayer.prepare();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+                    drawableAd.start();
+                    int a = shared.getInt("icon" , 0);
+                    switch (a) {
+                        case 0 :
+                            mediaPlayer= MediaPlayer.create(this.getContext() , R.raw.test);
+                            break;
+                        case 1 :
+                            mediaPlayer= MediaPlayer.create(this.getContext() , R.raw.testtwo);
+                            break;
+                        case 2 :
+                            mediaPlayer= MediaPlayer.create(this.getContext() , R.raw.testthree);
+                            break;
+                        case 3 :
+                            mediaPlayer= MediaPlayer.create(this.getContext() , R.raw.testfour);
+                            break;
                     }
                     mediaPlayer.start();
                     isclick = true ;
@@ -173,21 +210,56 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
                 break;
             case R.id.iv_icon:
                 rv.setVisibility(View.VISIBLE);
+
                 break;
             case R.id.icon_first:
+                if (drawableAd.isRunning()){
+                    drawableAd.stop();
+                }
+                if (mediaPlayer!= null&&mediaPlayer.isPlaying()){
+                    mediaPlayer.stop();
+                }
                 icon.setImageResource(R.mipmap.dlamwm);
+                edit.putInt("icon" , 0);
+                edit.apply();
                 rv.setVisibility(View.GONE);
                 break;
             case R.id.icon_second:
+                if (drawableAd.isRunning()){
+                    drawableAd.stop();
+                }
+                if (mediaPlayer!= null&&mediaPlayer.isPlaying()){
+                    mediaPlayer.stop();
+                }
                 icon.setImageResource(R.mipmap.dldtwo);
+                edit.putInt("icon" , 1);
+                edit.apply();
                 rv.setVisibility(View.GONE);
                 break;
             case R.id.icon_three:
+                if (drawableAd.isRunning()){
+                    drawableAd.stop();
+                }
+
+                if (mediaPlayer!= null&&mediaPlayer.isPlaying()){
+                    mediaPlayer.stop();
+                }
                 icon.setImageResource(R.mipmap.three);
+                edit.putInt("icon" , 2);
+                edit.apply();
                 rv.setVisibility(View.GONE);
                 break;
             case R.id.icon_four:
+                if (drawableAd.isRunning()){
+                    drawableAd.stop();
+                }
+
+                if (mediaPlayer!= null&&mediaPlayer.isPlaying()){
+                    mediaPlayer.stop();
+                }
                 icon.setImageResource(R.mipmap.four);
+                edit.putInt("icon" , 3);
+                edit.apply();
                 rv.setVisibility(View.GONE);
                 break;
             case R.id.select_rl :
@@ -195,6 +267,13 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
                 break;
         }
 
+    }
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (mediaPlayer != null&&mediaPlayer.isPlaying()){
+            mediaPlayer.stop();
+        }
     }
 }
 

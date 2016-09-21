@@ -329,6 +329,8 @@ public class LineChartViewDouble extends View {
      */
     public void setTempDay(int[] tempDay) {
         mTempDay = tempDay;
+        postInvalidate();
+
     }
 
     /**
@@ -337,5 +339,6 @@ public class LineChartViewDouble extends View {
      */
     public void setTempNight(int[] tempNight) {
         mTempNight = tempNight;
+        postInvalidate();
     }
 }

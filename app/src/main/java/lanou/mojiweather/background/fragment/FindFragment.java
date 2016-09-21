@@ -1,7 +1,7 @@
 package lanou.mojiweather.background.fragment;
 
 import lanou.mojiweather.R;
-import tool.BaseFragment;
+import lanou.mojiweather.tool.BaseFragment;
 
 /**
  * Created by dllo on 16/9/14.

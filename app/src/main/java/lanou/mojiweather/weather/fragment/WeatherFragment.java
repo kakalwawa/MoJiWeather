@@ -107,7 +107,6 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
 
                     lineChart.setTempDay(tempDay);
                     lineChart.setTempNight(tempNight);
-//                    Log.d("WeatherFragment", "weatherBean.getResults().get(0).getDaily().size():" + weatherBean.getResults().get(0).getDaily().size());
                 }
             });
         } catch (IOException e) {

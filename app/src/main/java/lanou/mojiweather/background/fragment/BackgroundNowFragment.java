@@ -1,4 +1,5 @@
 package lanou.mojiweather.background.fragment;
+
 import android.os.Handler;
 import android.os.Handler.Callback;
 import android.os.Message;
@@ -7,19 +8,17 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import java.io.IOException;
 
-import lanou.mojiweather.BuildConfig;
 import lanou.mojiweather.R;
-import tool.BaseFragment;
-import tool.NetTool;
-import tool.NetTool.ResponseListenner;
+import lanou.mojiweather.tool.BaseFragment;
+import lanou.mojiweather.tool.NetTool;
+
 /**
  * Created by dllo on 16/9/14.
  */
@@ -69,7 +68,7 @@ public class BackgroundNowFragment extends BaseFragment {
     @Override
     protected void initData() {
         try {
-            NetTool.getInstance().getData(TURNPICURL, TurnPicEntity.class, new ResponseListenner<TurnPicEntity>() {
+            NetTool.getInstance().getData(TURNPICURL, TurnPicEntity.class, new NetTool.ResponseListenner<TurnPicEntity>() {
                 @Override
                 public void onRespnseComplete(final TurnPicEntity turnPicEntity) {
                     turnPicAdapter.setTurnPicEntity(turnPicEntity);
@@ -133,7 +132,7 @@ public class BackgroundNowFragment extends BaseFragment {
         }
         //RecyclerView 获取网络数据
         try {
-            NetTool.getInstance().getData(RECYCLERVIEWURL, RecyclerViewEntity.class, new ResponseListenner<RecyclerViewEntity>() {
+            NetTool.getInstance().getData(RECYCLERVIEWURL, RecyclerViewEntity.class, new NetTool.ResponseListenner<RecyclerViewEntity>() {
                 @Override
                 public void onRespnseComplete(RecyclerViewEntity recyclerViewEntity) {
                     recyclerViewAdapter.setEntity(recyclerViewEntity);

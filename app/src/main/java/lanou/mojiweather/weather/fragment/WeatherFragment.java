@@ -73,6 +73,12 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
     private TextView dateFour;
     private TextView dateFive;
     private TextView dateSix;
+    private TextView weatherOne;
+    private TextView weatherTwo;
+    private TextView weatherThree;
+    private TextView weatherFour;
+    private TextView weatherFive;
+    private TextView weatherSix;
 
     @Override
     protected int setLayout() {
@@ -115,7 +121,14 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
         dateFour = (TextView) getView().findViewById(R.id.date_four);
         dateFive = (TextView) getView().findViewById(R.id.date_five);
         dateSix = (TextView) getView().findViewById(R.id.date_six);
-      
+        weatherOne = (TextView) getView().findViewById(R.id.weather_one);
+        weatherTwo = (TextView) getView().findViewById(R.id.weather_two);
+        weatherThree = (TextView) getView().findViewById(R.id.weather_three);
+        weatherFour = (TextView) getView().findViewById(R.id.weather_four);
+        weatherFive = (TextView) getView().findViewById(R.id.weather_five);
+        weatherSix = (TextView) getView().findViewById(R.id.weather_six);
+
+
     }
 
     @Override
@@ -143,23 +156,23 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
         linearLayout.setBackground(drawable);
         scrollView.setOnScrollChangedListener(scrollChangedListener);
         as = new AnimationSet(true);
-        AlphaAnimation aa1 = new AlphaAnimation(0.3f, 1.0f);
+        AlphaAnimation animation = new AlphaAnimation(0.3f, 1.0f);
         //动画持续的时间
-        aa1.setDuration(2000);
+        animation.setDuration(2000);
         //动画重复的次数
-        aa1.setRepeatCount(0);
+        animation.setRepeatCount(0);
         //动画重复的模式   REVERSE 倒序执行动画
         // aa.setRepeatMode(Animation.REVERSE);
         //停留在动画行结束的状态
-        aa1.setFillAfter(true);
+        animation.setFillAfter(true);
         //开始动画f
-        iv.startAnimation(aa1);
+        iv.startAnimation(animation);
         RotateAnimation ra1 = new RotateAnimation(0, 360,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         ra1.setDuration(2000);
         ra1.setRepeatCount(0);
         iv.startAnimation(ra1);
-        as.addAnimation(aa1);
+        as.addAnimation(animation);
         as.addAnimation(ra1);
     }
     @Override

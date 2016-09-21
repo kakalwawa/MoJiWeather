@@ -38,7 +38,6 @@ public class NetTool {
     }
 
     public <T> void getData(final String url, final Class<T> tClass, final ResponseListenner<T> responseListenner) throws IOException {
-
         Request request = new Request.Builder()
                 .url(url)
                 .build();

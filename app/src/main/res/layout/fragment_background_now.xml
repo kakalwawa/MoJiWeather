@@ -119,5 +119,14 @@
         android:layout_marginTop="-100dp"
         android:layout_marginLeft="160dp"
         />
+    <FrameLayout
+        android:id="@+id/pop_frame_layout_pick_pic"
+        android:layout_width="match_parent"
+        android:layout_height="144dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-92dp"
+        android:visibility="gone">
+        <include layout="@layout/pop_pick_pic"/>
+    </FrameLayout>
 
 </LinearLayout>

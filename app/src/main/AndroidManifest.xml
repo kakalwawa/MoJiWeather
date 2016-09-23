@@ -41,6 +41,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity"/>
+        <activity android:name=".background.fragment.SearchActivity"/>
     </application>
 
 </manifest>

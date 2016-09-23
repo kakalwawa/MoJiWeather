@@ -5,7 +5,6 @@ import android.content.Context;
 
 import cn.bmob.v3.Bmob;
 
-import lanou.mojiweather.tool.DaoMaster.DevOpenHelper;
 
 import cn.bmob.v3.Bmob;
 
@@ -16,8 +15,6 @@ import cn.bmob.v3.Bmob;
  */
 public class MyApp extends Application {
     private static Context mContext;
-    public static DaoMaster daoMaster;
-    public static DaoSession daoSession;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -30,19 +27,5 @@ public class MyApp extends Application {
 
     public static Context getContext() {
         return mContext;
-    }
-    public static DaoMaster getDaoMaster(){
-        DaoMaster.DevOpenHelper helper = new DevOpenHelper(getContext(),"search.db");
-        daoMaster = new DaoMaster(helper.getWritableDatabase());
-        return daoMaster;
-    }
-    public static DaoSession getDaoSession(){
-        if (daoSession == null){
-            if (daoMaster == null){
-                daoMaster = getDaoMaster();
-            }
-            daoSession = daoMaster.newSession();
-        }
-        return daoSession;
     }
 }

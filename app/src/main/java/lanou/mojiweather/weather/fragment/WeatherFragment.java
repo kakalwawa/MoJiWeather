@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
@@ -22,10 +23,17 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.iflytek.cloud.SpeechConstant;
+import com.iflytek.cloud.SpeechError;
+import com.iflytek.cloud.SpeechSynthesizer;
+import com.iflytek.cloud.SpeechUtility;
+import com.iflytek.cloud.SynthesizerListener;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import lanou.mojiweather.MainActivity;
 import lanou.mojiweather.R;
 
 import lanou.mojiweather.tool.BaseFragment;
@@ -117,7 +125,8 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
     private ImageView weatherNightIconFive;
     private ImageView weatherNightIconSix;
     private ImageView[] weatherNightIcons;
-
+    private SpeechSynthesizer mTts;
+    private WeatherBean bean;
     @Override
     protected int setLayout() {
         return R.layout.fragment_weather;
@@ -126,6 +135,9 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     protected void initView() {
+        SpeechUtility.createUtility(mContext, SpeechConstant.APPID + "= 57e27478");
+        //1.创建SpeechSynthesizer对象, 第二个参数：本地合成时传InitListener
+        mTts = SpeechSynthesizer.createSynthesizer(WeatherFragment.this.getContext(), null);
         surfaceView = (SceneSurfaceView) getView().findViewById(R.id.weather_scene);
         scrollView = (MyScrollView) getView().findViewById(R.id.scrollView_weather);
         linearLayout = (LinearLayout) getView().findViewById(R.id.weather_title_ll);
@@ -212,6 +224,7 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
             NetTool.getInstance().getData(URLValues.WEATHER, WeatherBean.class, new NetTool.ResponseListenner<WeatherBean>() {
                 @Override
                 public void onRespnseComplete(WeatherBean weatherBean) {
+                    bean = weatherBean;
                     int[]tempDay = new int[weatherBean.getResults().get(0).getDaily().size()];
                     int[]tempNight = new int[weatherBean.getResults().get(0).getDaily().size()];
                     for (int i = 0; i <weatherBean.getResults().get(0).getDaily().size() ; i++) {
@@ -373,7 +386,8 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
             case R.id.voice_animation:
                 if( isclick ){
                     drawableAd.stop();
-                    mediaPlayer.stop();
+                   // mediaPlayer.stop();
+                    mTts.stopSpeaking();
                     isclick = false ;
 
                 }else {
@@ -381,19 +395,45 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
                     int a = shared.getInt("icon" , 0);
                     switch (a) {
                         case 0 :
-                            mediaPlayer= MediaPlayer.create(this.getContext() , R.raw.test);
+                            //mediaPlayer= MediaPlayer.create(this.getContext() , R.raw.test);
+                            mTts.setParameter(SpeechConstant.VOICE_NAME, "xiaoyan");//设置发音人
+                            mTts.setParameter(SpeechConstant.SPEED, "50");//设置语速
+                            mTts.setParameter(SpeechConstant.VOLUME, "80");//设置音量，范围0~100
+                            mTts.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD); //设置云端
+                            Log.d("WeatherFragment", "aaa");
+
                             break;
                         case 1 :
-                            mediaPlayer= MediaPlayer.create(this.getContext() , R.raw.testtwo);
+                           // mediaPlayer= MediaPlayer.create(this.getContext() , R.raw.testtwo);
+                            mTts.setParameter(SpeechConstant.VOICE_NAME, "xiaoyun");//设置发音人
+                            mTts.setParameter(SpeechConstant.SPEED, "50");//设置语速
+                            mTts.setParameter(SpeechConstant.VOLUME, "80");//设置音量，范围0~100
+                            mTts.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD); //设置云端
+
                             break;
                         case 2 :
-                            mediaPlayer= MediaPlayer.create(this.getContext() , R.raw.testthree);
+                           // mediaPlayer= MediaPlayer.create(this.getContext() , R.raw.testthree);
+                            mTts.setParameter(SpeechConstant.VOICE_NAME, "xiaoqi");//设置发音人
+                            mTts.setParameter(SpeechConstant.SPEED, "50");//设置语速
+                            mTts.setParameter(SpeechConstant.VOLUME, "80");//设置音量，范围0~100
+                            mTts.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD); //设置云端
+
                             break;
                         case 3 :
-                            mediaPlayer= MediaPlayer.create(this.getContext() , R.raw.testfour);
+                          //  mediaPlayer= MediaPlayer.create(this.getContext() , R.raw.testfour);
+                            mTts.setParameter(SpeechConstant.VOICE_NAME, "xiaomei");//设置发音人
+                            mTts.setParameter(SpeechConstant.SPEED, "50");//设置语速
+                            mTts.setParameter(SpeechConstant.VOLUME, "80");//设置音量，范围0~100
+                            mTts.setParameter(SpeechConstant.ENGINE_TYPE, SpeechConstant.TYPE_CLOUD); //设置云端
+
                             break;
                     }
-                    mediaPlayer.start();
+//                    mediaPlayer.start();
+
+                    mTts.startSpeaking("今天是"+bean.getResults().get(0).getDaily().get(0).getDate()+"今天天气"+bean.getResults().get(0).getDaily().get(0).getText_day()+
+                            "最高温度是"+bean.getResults().get(0).getDaily().get(0).getHigh()+"度"+"最低温度是"+bean.getResults().get(0).getDaily().get(0).getLow()+"度"+
+                            "今天的风向是"+bean.getResults().get(0).getDaily().get(0).getWind_direction()+"风风速为"+bean.getResults().get(0).getDaily().get(0).getWind_speed(),mSynListener);
+                    Log.d("WeatherFragment", "speak");
                     isclick = true ;
                 }
 
@@ -406,9 +446,12 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
                 if (drawableAd.isRunning()){
                     drawableAd.stop();
                 }
-                if (mediaPlayer!= null&&mediaPlayer.isPlaying()){
-                    mediaPlayer.stop();
+                if (mTts != null && mTts.isSpeaking()){
+                    mTts.stopSpeaking();
                 }
+//                if (mediaPlayer!= null&&mediaPlayer.isPlaying()){
+//                    mediaPlayer.stop();
+//                }
                 icon.setImageResource(R.mipmap.dlamwm);
                 edit.putInt("icon" , 0);
                 edit.apply();
@@ -418,9 +461,12 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
                 if (drawableAd.isRunning()){
                     drawableAd.stop();
                 }
-                if (mediaPlayer!= null&&mediaPlayer.isPlaying()){
-                    mediaPlayer.stop();
+                if (mTts != null && mTts.isSpeaking()){
+                    mTts.stopSpeaking();
                 }
+//                if (mediaPlayer!= null&&mediaPlayer.isPlaying()){
+//                    mediaPlayer.stop();
+//                }
                 icon.setImageResource(R.mipmap.dldtwo);
                 edit.putInt("icon" , 1);
                 edit.apply();
@@ -430,10 +476,12 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
                 if (drawableAd.isRunning()){
                     drawableAd.stop();
                 }
-
-                if (mediaPlayer!= null&&mediaPlayer.isPlaying()){
-                    mediaPlayer.stop();
+                if (mTts != null && mTts.isSpeaking()){
+                    mTts.stopSpeaking();
                 }
+//                if (mediaPlayer!= null&&mediaPlayer.isPlaying()){
+//                    mediaPlayer.stop();
+//                }
                 icon.setImageResource(R.mipmap.three);
                 edit.putInt("icon" , 2);
                 edit.apply();
@@ -443,10 +491,12 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
                 if (drawableAd.isRunning()){
                     drawableAd.stop();
                 }
-
-                if (mediaPlayer!= null&&mediaPlayer.isPlaying()){
-                    mediaPlayer.stop();
+                if (mTts != null && mTts.isSpeaking()){
+                    mTts.stopSpeaking();
                 }
+//                if (mediaPlayer!= null&&mediaPlayer.isPlaying()){
+//                    mediaPlayer.stop();
+//                }
                 icon.setImageResource(R.mipmap.four);
                 edit.putInt("icon" , 3);
                 edit.apply();
@@ -461,10 +511,47 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onPause() {
         super.onPause();
-        if (mediaPlayer != null&&mediaPlayer.isPlaying()){
-            mediaPlayer.stop();
+//        if (mediaPlayer != null&&mediaPlayer.isPlaying()){
+//            mediaPlayer.stop();
+//        }
+        if (mTts != null && mTts.isSpeaking()){
+            mTts.stopSpeaking();
         }
     }
+    private SynthesizerListener mSynListener = new SynthesizerListener() {
+
+
+        //会话结束回调接口，没有错误时，error为null
+        public void onCompleted(SpeechError error) {
+        }
+
+        //缓冲进度回调
+        //percent为缓冲进度0~100，beginPos为缓冲音频在文本中开始位置，endPos表示缓冲音频在文本中结束位置，info为附加信息。
+        public void onBufferProgress(int percent, int beginPos, int endPos, String info) {
+        }
+
+        //开始播放
+        public void onSpeakBegin() {
+        }
+
+        //暂停播放
+        public void onSpeakPaused() {
+        }
+
+        //播放进度回调
+        //percent为播放进度0~100,beginPos为播放音频在文本中开始位置，endPos表示播放音频在文本中结束位置.
+        public void onSpeakProgress(int percent, int beginPos, int endPos) {
+        }
+
+        //恢复播放回调接口
+        public void onSpeakResumed() {
+        }
+
+
+        //会话事件回调接口
+        public void onEvent(int arg0, int arg1, int arg2, Bundle arg3) {
+        }
+    };
 }
 
 

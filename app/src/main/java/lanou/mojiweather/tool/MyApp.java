@@ -3,6 +3,7 @@ package lanou.mojiweather.tool;
 import android.app.Application;
 import android.content.Context;
 
+import cn.bmob.v3.Bmob;
 
 import lanou.mojiweather.tool.DaoMaster.DevOpenHelper;
 

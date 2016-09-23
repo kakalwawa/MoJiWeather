@@ -17,9 +17,9 @@ import java.io.IOException;
 
 import lanou.mojiweather.BuildConfig;
 import lanou.mojiweather.R;
-import tool.BaseFragment;
-import tool.NetTool;
-import tool.NetTool.ResponseListenner;
+import lanou.mojiweather.tool.BaseFragment;
+import lanou.mojiweather.tool.NetTool;
+
 /**
  * Created by dllo on 16/9/14.
  */
@@ -69,7 +69,7 @@ public class BackgroundNowFragment extends BaseFragment {
     @Override
     protected void initData() {
         try {
-            NetTool.getInstance().getData(TURNPICURL, TurnPicEntity.class, new ResponseListenner<TurnPicEntity>() {
+            NetTool.getInstance().getData(TURNPICURL, TurnPicEntity.class, new NetTool.ResponseListenner<TurnPicEntity>() {
                 @Override
                 public void onRespnseComplete(final TurnPicEntity turnPicEntity) {
                     turnPicAdapter.setTurnPicEntity(turnPicEntity);
@@ -133,7 +133,7 @@ public class BackgroundNowFragment extends BaseFragment {
         }
         //RecyclerView 获取网络数据
         try {
-            NetTool.getInstance().getData(RECYCLERVIEWURL, RecyclerViewEntity.class, new ResponseListenner<RecyclerViewEntity>() {
+            NetTool.getInstance().getData(RECYCLERVIEWURL, RecyclerViewEntity.class, new NetTool.ResponseListenner<RecyclerViewEntity>() {
                 @Override
                 public void onRespnseComplete(RecyclerViewEntity recyclerViewEntity) {
                     recyclerViewAdapter.setEntity(recyclerViewEntity);

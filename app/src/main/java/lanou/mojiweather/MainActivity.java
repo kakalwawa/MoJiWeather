@@ -1,6 +1,7 @@
 package lanou.mojiweather;
 
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.RadioButton;
@@ -16,6 +17,9 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private RadioButton rbBackground;
     private  RadioButton rbMe ;
     private RadioGroup rg;
+
+
+
     @Override
     protected int setLayout() {
         return R.layout.activity_main;
@@ -49,9 +53,10 @@ public class MainActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
         switch (checkedId) {
             case  R.id.rb_weather:
-                fragmentTransaction.replace(R.id.main_fragment , new WeatherFragment());
+                fragmentTransaction.replace(R.id.main_fragment , new WeatherFragment() );
                 break;
             case  R.id.rb_background:
                 fragmentTransaction.replace(R.id.main_fragment , new BackgroundFragment());

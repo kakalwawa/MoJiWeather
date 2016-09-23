@@ -18,7 +18,7 @@
             >
 
             <LinearLayout
-                android:id="@+id/my_position_linearlayout"
+                android:id="@+id/my_mop_linearlayout"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:orientation="horizontal"
@@ -30,7 +30,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="3dp"
-                    android:src="@mipmap/lingdang" />
+                    android:src="@mipmap/map" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -38,8 +38,8 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="3dp"
-                    android:text="墨迹公告"
-                    android:textSize="20sp" />
+                    android:text="不墨迹地图"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <View
@@ -49,7 +49,7 @@
                 android:background="#cecece" />
 
             <LinearLayout
-
+                android:id="@+id/live_moquan"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:orientation="horizontal"
@@ -61,7 +61,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="3dp"
-                    android:src="@mipmap/moquan" />
+                    android:src="@mipmap/moquanone" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -69,9 +69,15 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="3dp"
-                    android:text="墨圈"
-                    android:textSize="20sp" />
+                    android:text="墨圈直播"
+                    android:textSize="18sp" />
             </LinearLayout>
+            <View
+                android:layout_marginLeft="45dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#cecece"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -85,7 +91,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="3dp"
-                    android:src="@mipmap/activity_center" />
+                    android:src="@mipmap/activity" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -94,8 +100,14 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="3dp"
                     android:text="活动中心"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
+            <View
+                android:layout_marginLeft="45dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#cecece"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -109,7 +121,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="3dp"
-                    android:src="@mipmap/pifuxiaopu" />
+                    android:src="@mipmap/huanfu" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -118,8 +130,14 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="3dp"
                     android:text="皮肤小铺"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
+            <View
+                android:layout_marginLeft="45dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#cecece"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -142,7 +160,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="3dp"
                     android:text="个性助手"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <View
@@ -163,7 +181,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
                     android:layout_marginTop="3dp"
-                    android:src="@mipmap/youliintent" />
+                    android:src="@mipmap/video" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -171,8 +189,8 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="3dp"
-                    android:text="有利网"
-                    android:textSize="20sp" />
+                    android:text="视频站"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <View
@@ -202,8 +220,15 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="3dp"
                     android:text="墨迹商城"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
+            <View
+                android:weightSum="1"
+                android:layout_marginLeft="45dp"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#cecece"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -226,7 +251,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="3dp"
                     android:text="空气果"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <View
@@ -256,7 +281,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="3dp"
                     android:text="设置"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <View
@@ -286,7 +311,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="3dp"
                     android:text="清理缓存"
-                    android:textSize="20sp" />
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <View

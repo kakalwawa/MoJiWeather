@@ -20,8 +20,10 @@ import lanou.mojiweather.BuildConfig;
 import lanou.mojiweather.R;
 import lanou.mojiweather.tool.BaseFragment;
 
+
 import lanou.mojiweather.tool.NetTool;
 import lanou.mojiweather.tool.NetTool.ResponseListenner;
+
 
 
 

@@ -6,13 +6,14 @@ import android.graphics.BitmapFactory;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
+import cn.bmob.v3.BmobUser;
 
 
 /**
  * 设置用户头像
  * Created by shiyujia on 16/9/20.
  */
-public class MyUser  {
+public class MyUser extends BmobUser {
     private static final String TAG = "TAG_MyUser";
     private byte[] icon;//用户头像
 

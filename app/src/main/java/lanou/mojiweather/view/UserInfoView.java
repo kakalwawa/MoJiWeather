@@ -18,10 +18,11 @@ import lanou.mojiweather.R;
 public class UserInfoView extends RelativeLayout {
     private static final String TAG = "TAG_UserInfoView";
 
-    private RelativeLayout mRl_center;
-    private ImageView mIv_head;
-    private ImageView mIv_share;
-    private TextView mTv_username, mTv_username_top;
+    private RelativeLayout mRlCenter;
+    private ImageView mIvHead;
+    private ImageView mIvShare;
+    private TextView mTvUsername;
+    private TextView mTvUsernameTop;
 
     public static int MOVE_INIT_X;
     public static int MOVE_FINAL_X;
@@ -51,19 +52,19 @@ public class UserInfoView extends RelativeLayout {
     }
 
     void initView() {
-        mRl_center = (RelativeLayout) findViewById(R.id.BM_Ll_mine_center);
-        mTv_username = (TextView) findViewById(R.id.BM_Tv_mine_username);
-        mIv_head = (ImageView) findViewById(R.id.BM_Iv_mine_head);//头像
-        mTv_username_top = (TextView) findViewById(R.id.BM_Tv_mine_username_top);
-        mIv_share = (ImageView) findViewById(R.id.BM_Iv_mine_share);//消息
+        mRlCenter = (RelativeLayout) findViewById(R.id.bm_li_mine_center);
+        mTvUsername = (TextView) findViewById(R.id.tv_mine_username);
+        mIvHead = (ImageView) findViewById(R.id.mine_iv_head);//头像
+        mTvUsernameTop = (TextView) findViewById(R.id.tv_mine_username_top);
+        mIvShare = (ImageView) findViewById(R.id.Iv_mine_share);//消息
 
 
         getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 if (isFirst) {
-                    MOVE_INIT_X = (int) mIv_share.getX();
-                    MOVE_FINAL_X = getMeasuredWidth() - mIv_share.getMeasuredWidth() - getResources().getDimensionPixelSize(R.dimen.userinfo_move_marginRight);
+                    MOVE_INIT_X = (int) mIvShare.getX();
+                    MOVE_FINAL_X = getMeasuredWidth() - mIvShare.getMeasuredWidth() - getResources().getDimensionPixelSize(R.dimen.userinfo_move_marginRight);
 
                     isFirst = false;
                 }
@@ -77,6 +78,7 @@ public class UserInfoView extends RelativeLayout {
 
     /**
      * 中间过程动画处理
+     *
      * @param range
      */
     public void onChange(int range) {
@@ -84,31 +86,30 @@ public class UserInfoView extends RelativeLayout {
         mRange = range * STANDARD_RANGE / MAX_RANGE;
 
         if (mRange <= HEAD_GONE_VALUE) {
-            mRl_center.setVisibility(VISIBLE);
+            mRlCenter.setVisibility(VISIBLE);
 
             int alpha = 255 - 255 * (mRange) / HEAD_GONE_VALUE;
-            mIv_head.setAlpha(alpha);
-            mTv_username.setTextColor(Color.argb(alpha, 255, 255, 255));
+            mIvHead.setAlpha(alpha);
+            mTvUsername.setTextColor(Color.argb(alpha, 255, 255, 255));
             float scale = (float) mRange / STANDARD_RANGE;
-            mRl_center.setScaleX((1 - scale)*0.3f+0.7f);
-            mRl_center.setScaleY((1 - scale)*0.3f+0.7f);
+            mRlCenter.setScaleX((1 - scale) * 0.3f + 0.7f);
+            mRlCenter.setScaleY((1 - scale) * 0.3f + 0.7f);
 
-//            mTv_username.setScaleX(1-scale);
-//            mTv_username.setScaleY(1-scale);
+
         } else {
-            mRl_center.setVisibility(INVISIBLE);
+            mRlCenter.setVisibility(INVISIBLE);
         }
 
         if (mRange >= STANDARD_RANGE - HEAD_GONE_VALUE) {
-            mTv_username_top.setVisibility(VISIBLE);
+            mTvUsernameTop.setVisibility(VISIBLE);
 
             int alpha = 255 * (STANDARD_RANGE - mRange) / HEAD_GONE_VALUE;
-            mTv_username_top.setTextColor(Color.argb(255 - alpha, 255, 255, 255));
+            mTvUsernameTop.setTextColor(Color.argb(255 - alpha, 255, 255, 255));
         } else {
-            mTv_username_top.setVisibility(INVISIBLE);
+            mTvUsernameTop.setVisibility(INVISIBLE);
         }
 
         int x = mRange * (MOVE_FINAL_X - MOVE_INIT_X) / STANDARD_RANGE + MOVE_INIT_X;
-        mIv_share.setX(x);
+        mIvShare.setX(x);
     }
 }

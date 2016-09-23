@@ -5,13 +5,21 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.PropertyValuesHolder;
 import android.animation.ValueAnimator;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SaveListener;
 import lanou.mojiweather.tool.BaseActivity;
+import lanou.mojiweather.tool.MyUser;
 import lanou.mojiweather.view.JellyInterpolator;
 
 /**
@@ -20,18 +28,16 @@ import lanou.mojiweather.view.JellyInterpolator;
  */
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "TAG_LoginActivity";
+
     private TextView mBtnLogin;
-
     private View progress;
-
     private View mInputLayout;
-
     private float mWidth, mHeight;
-
     private LinearLayout mName, mPsw;
     private ImageView back;
     private TextView signUp;
-
+    private EditText pass;
+    private EditText userName;
 
     @Override
     protected int setLayout() {
@@ -45,7 +51,14 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         mInputLayout = findViewById(R.id.input_layout);
         mName = (LinearLayout) findViewById(R.id.input_layout_name);
         mPsw = (LinearLayout) findViewById(R.id.input_layout_psw);
-        back = (ImageView) findViewById(R.id.login_back);
+
+
+        //密码
+        pass = (EditText) findViewById(R.id.pass);
+        //用户名 邮箱
+        userName = (EditText) findViewById(R.id.user_name);
+
+        back = (ImageView) findViewById(R.id.login_back);//返回
         signUp = (TextView) findViewById(R.id.login_signup);//注册
 
         signUp.setOnClickListener(this);
@@ -55,6 +68,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     protected void initDate() {
+
+
     }
     /**
      * Called when a view has been clicked.
@@ -65,15 +80,20 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.main_btn_login:
+                if(userName.getText().length()==0||pass.getText().length()==0){
+                    Toast.makeText(this, "亲~账号密码都要输入内容哦!", Toast.LENGTH_SHORT).show();
+                }else {
+                    login();
+                    // 计算出控件的高与宽
+                    mWidth = mBtnLogin.getMeasuredWidth();
+                    mHeight = mBtnLogin.getMeasuredHeight();
+                    // 隐藏输入框
+                    mName.setVisibility(View.INVISIBLE);
+                    mPsw.setVisibility(View.INVISIBLE);
+                    inputAnimator(mInputLayout, mWidth, mHeight);
 
-                // 计算出控件的高与宽
-                mWidth = mBtnLogin.getMeasuredWidth();
-                mHeight = mBtnLogin.getMeasuredHeight();
-                // 隐藏输入框
-                mName.setVisibility(View.INVISIBLE);
-                mPsw.setVisibility(View.INVISIBLE);
+                }
 
-                inputAnimator(mInputLayout, mWidth, mHeight);
                 break;
 
 
@@ -82,7 +102,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 break;
 
             case R.id.login_signup:
-
+                Intent intent = new Intent(this,SignUpActivity.class);
+                startActivity(intent);
                 break;
 
         }
@@ -136,6 +157,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                 progress.setVisibility(View.VISIBLE);
                 progressAnimator(progress);
                 mInputLayout.setVisibility(View.INVISIBLE);
+                finish();
+
+
             }
             @Override
             public void onAnimationCancel(Animator animation) {
@@ -159,6 +183,30 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         animator3.setDuration(1000);
         animator3.setInterpolator(new JellyInterpolator());
         animator3.start();
+
+
+    }
+
+
+    //登录
+    private void login() {
+        BmobUser bmobUser = new BmobUser();
+        bmobUser.setUsername(userName.getText().toString());
+        bmobUser.setPassword(pass.getText().toString());
+        bmobUser.login(new SaveListener<MyUser>() {
+            @Override
+            public void done(MyUser myUser, BmobException e) {
+                if (e==null){
+                    Toast.makeText(LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+
+
+
+                }else {
+                    Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
 
     }
 

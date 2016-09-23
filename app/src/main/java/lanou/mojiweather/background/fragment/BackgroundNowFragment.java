@@ -165,6 +165,11 @@ public class BackgroundNowFragment extends BaseFragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+
+
+
+
         goTopScrollView.setScrollListener(goTopBtn);
         //点击相机获取图库照片
         CamaraimageView.setOnClickListener(new OnClickListener() {

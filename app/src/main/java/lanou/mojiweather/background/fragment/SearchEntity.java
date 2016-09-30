@@ -1,25 +1,25 @@
 package lanou.mojiweather.background.fragment;
 
 /**
- * Created by dllo on 16/9/22.
+ * Created by dllo on 16/9/26.
  */
 public class SearchEntity {
 
     /**
-     * id : 586315
-     * name : 我来告诉你，今天的海是什么颜色
-     * photos_count : 128
-     * start_date : 2016-07-18
-     * end_date : 2016-07-20
-     * days : 3
+     * id : 594734
+     * name : 转眼又是秋 京冀辽自驾游——快乐咔嚓声
+     * photos_count : 198
+     * start_date : 2016-09-01
+     * end_date : 2016-09-06
+     * days : 6
      * level : 3
-     * views_count : 4922
-     * comments_count : 2
-     * likes_count : 51
-     * source : web
-     * front_cover_photo_url : http://p.chanyouji.cn/586315/1470148250232p1ap5qk2is1otr1oh71rv3ikir2.jpg
+     * views_count : 7334
+     * comments_count : 31
+     * likes_count : 170
+     * source : app
+     * front_cover_photo_url : http://p.chanyouji.cn/1474026709/1h0l6gms2837grsvfugdio714.jpg
      * featured : false
-     * user : {"id":657972,"name":"小瓜爱旅游","image":"http://q.qlogo.cn/qqapp/100277927/A4A38C5CA5C25D22086D899540B71630/100"}
+     * user : {"id":131541,"name":"片儿川","image":"http://a.chanyouji.cn/131541/1473663618045.jpg"}
      */
 
     private int id;
@@ -36,9 +36,9 @@ public class SearchEntity {
     private String front_cover_photo_url;
     private boolean featured;
     /**
-     * id : 657972
-     * name : 小瓜爱旅游
-     * image : http://q.qlogo.cn/qqapp/100277927/A4A38C5CA5C25D22086D899540B71630/100
+     * id : 131541
+     * name : 片儿川
+     * image : http://a.chanyouji.cn/131541/1473663618045.jpg
      */
 
     private UserBean user;

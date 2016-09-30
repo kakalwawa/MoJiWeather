@@ -17,6 +17,8 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.RecyclerView.ViewHolder;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 
@@ -32,6 +34,7 @@ import android.widget.LinearLayout;
 
 
 import java.io.IOException;
+import java.util.Collections;
 
 import lanou.mojiweather.R;
 import lanou.mojiweather.tool.BaseFragment;
@@ -61,6 +64,7 @@ public class BackgroundNowFragment extends BaseFragment {
     private TextView textViewPickPicCancel;
     private TextView textViewPickFromPics;
     private TextView textViewTakePhoto;
+    private RecyclerViewEntity recyclerViewEntity;
     @Override
     protected int setLayout() {
         return R.layout.fragment_background_now;
@@ -164,15 +168,52 @@ public class BackgroundNowFragment extends BaseFragment {
                 @Override
                 public void onRespnseComplete(RecyclerViewEntity recyclerViewEntity) {
                     recyclerViewAdapter.setEntity(recyclerViewEntity);
+                    BackgroundNowFragment.this.recyclerViewEntity = recyclerViewEntity;
                     //Log.d("++++++",recyclerViewEntity.getList().get(0).getCityName());
                     recyclerViewAdapter.notifyDataSetChanged();
                     recyclerView.setAdapter(recyclerViewAdapter);
                     recyclerViewWorldAdapter.setEntity(recyclerViewEntity);
                     recyclerViewWorldAdapter.notifyDataSetChanged();
                     worldRecyclerView.setAdapter(recyclerViewWorldAdapter);
+                    worldRecyclerView.addOnItemTouchListener(new OnRecyclerItemClickListener(worldRecyclerView) {
+                        @Override
+                        public void onItemClick(ViewHolder vh) {
+
+                        }
+                    });
 
                 }
             });
+            ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.Callback() {
+                @Override
+                public int getMovementFlags(RecyclerView recyclerView, ViewHolder viewHolder) {
+                    int dragsFlag;
+                    int swipFlag = 0;
+                    if (recyclerView.getLayoutManager() instanceof GridLayoutManager){
+                        dragsFlag = ItemTouchHelper.UP|ItemTouchHelper.DOWN
+                                |ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+                    }else {
+                        dragsFlag = ItemTouchHelper.UP|ItemTouchHelper.DOWN;
+                        swipFlag = ItemTouchHelper.END;
+                    }
+                    return makeMovementFlags(dragsFlag,swipFlag);
+                }
+
+                @Override
+                public boolean onMove(RecyclerView recyclerView, ViewHolder viewHolder, ViewHolder target) {
+                    int fromPos = viewHolder.getLayoutPosition();
+                    int toPos = target.getLayoutPosition();
+
+                    return false;
+                }
+
+                @Override
+                public void onSwiped(ViewHolder viewHolder, int direction) {
+
+                }
+            }){
+
+            };
         } catch (IOException e) {
             e.printStackTrace();
         }

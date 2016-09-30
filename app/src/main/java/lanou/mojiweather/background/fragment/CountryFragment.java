@@ -1,13 +1,17 @@
 package lanou.mojiweather.background.fragment;
 
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 
 import java.io.IOException;
 
 import lanou.mojiweather.BuildConfig;
 import lanou.mojiweather.R;
+import lanou.mojiweather.background.fragment.CountryAdapter.OnRecyclerItemClickListener;
+import lanou.mojiweather.background.fragment.CountryAdapter.ViewHolder;
 import lanou.mojiweather.tool.BaseFragment;
 import lanou.mojiweather.tool.NetTool;
 import lanou.mojiweather.tool.NetTool.ResponseListenner;
@@ -20,6 +24,7 @@ public class CountryFragment extends BaseFragment {
     private CountryAdapter countryAdapter;
     public static final String countryUrl = "http://chanyouji.com/api/destinations/list.json";
     private GridLayoutManager manager;
+    SearchPlaceEntity searchPlaceEntity;
 
     @Override
     protected int setLayout() {
@@ -40,8 +45,8 @@ public class CountryFragment extends BaseFragment {
                 @Override
                 public void onRespnseComplete(SearchPlaceEntity searchPlaceEntity) {
                     countryAdapter.setSearchPlaceEntity(searchPlaceEntity);
-                    Log.d("CountryFragment++++++", searchPlaceEntity.getChina_destinations().get(0).getName());
                     countryAdapter.notifyDataSetChanged();
+                    CountryFragment.this.searchPlaceEntity = searchPlaceEntity;
                 }
             });
         } catch (IOException e) {
@@ -49,6 +54,18 @@ public class CountryFragment extends BaseFragment {
         }
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(countryAdapter);
+        countryAdapter.setOnrecyclerItemClickListener(new OnRecyclerItemClickListener() {
+            @Override
+            public void onItemClick(View view, ViewHolder holder, int position) {
+                Intent intent = new Intent(CountryFragment.this.getContext(),SearchDetailActivity.class);
+                String name = searchPlaceEntity.getOther_destinations().get(position).getName();
+                int id = searchPlaceEntity.getOther_destinations().get(position).getId();
+                intent.putExtra("id",id);
+                intent.putExtra("name",name);
+                startActivity(intent);
+
+            }
+        });
 
     }
 }

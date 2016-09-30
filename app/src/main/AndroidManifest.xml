@@ -48,6 +48,8 @@
         <activity android:name=".SignUpActivity"/>
         <activity android:name=".MyInFormationActivity"/>
         <activity android:name=".MoquanLiveActitvty"/>
+        <activity android:name=".background.fragment.SearchDetailActivity"/>
+        <activity android:name=".background.fragment.HomeActivity"/>
 
 
     </application>

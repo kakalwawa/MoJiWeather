@@ -26,6 +26,7 @@ public class BackgroundFragment extends BaseFragment implements OnClickListener 
     private List<Fragment> fragments;
     private BackgroundFragmentAdapter adapter;
     private ImageView imageViewSearch;
+    private ImageView imageViewHome;
     @Override
     protected int setLayout() {
         return R.layout.fragment_background;
@@ -38,6 +39,7 @@ public class BackgroundFragment extends BaseFragment implements OnClickListener 
         fragments = new ArrayList<>();
         adapter = new BackgroundFragmentAdapter(getChildFragmentManager());
         imageViewSearch = (ImageView) getView().findViewById(R.id.iv_search);
+        imageViewHome = (ImageView) getView().findViewById(R.id.iv_house);
 
     }
 
@@ -49,6 +51,7 @@ public class BackgroundFragment extends BaseFragment implements OnClickListener 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         imageViewSearch.setOnClickListener(this);
+        imageViewHome.setOnClickListener(this);
 
     }
 
@@ -63,6 +66,10 @@ public class BackgroundFragment extends BaseFragment implements OnClickListener 
             case R.id.iv_search:
                 Intent intent = new Intent(this.getActivity(),SearchActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.iv_house:
+                Intent intentHA = new Intent(this.getActivity(),HomeActivity.class);
+                startActivity(intentHA);
                 break;
         }
     }

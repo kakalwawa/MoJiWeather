@@ -1,4 +1,5 @@
 package lanou.mojiweather.background.fragment;
+
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,17 +7,17 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import lanou.mojiweather.R;
 
 /**
  * Created by dllo on 16/9/23.
  */
-public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHolder> {
+public class ForeignAdapter extends RecyclerView.Adapter<ForeignAdapter.ViewHolder> {
     private SearchPlaceEntity searchPlaceEntity;
     private LayoutInflater inflater;
-    private OnRecyclerItemClickListener listener;
-
-    public CountryAdapter(Context context) {
+    private OnRecyclerViewItemClickListener listener;
+    public ForeignAdapter(Context context) {
         inflater = LayoutInflater.from(context);
     }
 
@@ -32,13 +33,12 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        holder.textView.setText(searchPlaceEntity.getOther_destinations().get(position).getName());
+        holder.textView.setText(searchPlaceEntity.getChina_destinations().get(position).getName());
         if (listener != null){
             holder.textView.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int clickPosition = holder.getAdapterPosition();
-                    listener.onItemClick(v,holder,clickPosition);
+                    listener.onClick(v,holder,position);
                 }
             });
         }
@@ -48,7 +48,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
     @Override
     public int getItemCount() {
         try {
-            return searchPlaceEntity.getOther_destinations().size();
+            return searchPlaceEntity.getChina_destinations().size();
         }catch (Exception e){
             return 0;
 
@@ -63,11 +63,10 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.ViewHold
             textView = (TextView) itemView.findViewById(R.id.tv_item_country_recyclerview);
         }
     }
-    public interface OnRecyclerItemClickListener{
-        void onItemClick(View view,ViewHolder holder,int position);
+    public interface OnRecyclerViewItemClickListener{
+        void onClick(View view,ViewHolder viewHolder,int psition);
     }
-    public void setOnrecyclerItemClickListener(OnRecyclerItemClickListener listener){
+    public void setListener(OnRecyclerViewItemClickListener listener){
         this.listener = listener;
-
     }
 }

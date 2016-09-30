@@ -52,7 +52,12 @@ public class RecyclerViewFindAdapter extends RecyclerView.Adapter<RecyclerViewFi
 
     @Override
     public int getItemCount() {
-        return entity.getRecommendplaces().size();
+        try {
+            return entity.getRecommendplaces().size();
+        }catch (Exception e){
+
+        }
+        return 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

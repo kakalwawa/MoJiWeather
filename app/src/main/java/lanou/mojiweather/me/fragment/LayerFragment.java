@@ -253,7 +253,7 @@ public class LayerFragment extends Fragment implements View.OnClickListener {
 
             CustomRoundView crvheadimage = (CustomRoundView) giftView.findViewById(R.id.crvheadimage);
             final MagicTextView giftNum = (MagicTextView) giftView.findViewById(R.id.giftNum);/*找到数量控件*/
-            giftNum.setText("x1");/*设置礼物数量*/
+            giftNum.setText("x1 ");/*设置礼物数量*/
             crvheadimage.setTag(System.currentTimeMillis());/*设置时间标记*/
             giftNum.setTag(1);/*给数量控件设置标记*/
 
@@ -318,6 +318,7 @@ public class LayerFragment extends Fragment implements View.OnClickListener {
     }
 
     /**
+     *
      * 显示软键盘并因此头布局
      */
     private void showKeyboard() {
@@ -429,6 +430,7 @@ public class LayerFragment extends Fragment implements View.OnClickListener {
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
                 isOpen = false;
+
             }
             @Override
             public void onAnimationStart(Animator animation) {

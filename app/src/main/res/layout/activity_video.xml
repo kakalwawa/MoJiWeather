@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <lanou.mojiweather.view.PullDownScrollView
+        android:id="@+id/refresh_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+      >
+        <ScrollView
+            android:id="@+id/selection_scrollview"
+            android:scrollbars="none"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+               <lanou.mojiweather.view.MyListView
+                   android:id="@+id/selection_ls"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent">
+               </lanou.mojiweather.view.MyListView>
+
+                <RelativeLayout
+                    android:id="@+id/look_before_selection_relayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/look_for_more_selection_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/go_to_look_more_iv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/look_for_more_selection_tv"
+                        android:src="@mipmap/go_to" />
+
+                </RelativeLayout>
+                <lanou.mojiweather.view.RecyclableImageView
+                    android:id="@+id/selection_more_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:scaleType="centerCrop"
+                    />
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/selection_re"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@android:color/black" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="#d5d5d5" />
+
+                <TextView
+                    android:id="@+id/latest_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <include layout="@layout/first_item_latest_update_author" />
+
+                <include layout="@layout/second_item_latest_update_author" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="15dp">
+
+                    <TextView
+                        android:id="@+id/look_for_more_author_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:textSize="15sp" />
+
+                    <ImageView
+                        android:id="@+id/go_to_more_author_iv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@id/look_for_more_author_tv"
+                        android:src="@mipmap/go_to" />
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+    </lanou.mojiweather.view.PullDownScrollView>
+    <RelativeLayout
+        android:id="@+id/search_anmi_re"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff">
+
+        <ImageView
+            android:id="@+id/ic_eye_black_outer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/ic_eye_black_outer" />
+
+        <ImageView
+            android:id="@+id/ic_eye_black_inner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@mipmap/ic_eye_black_inner" />
+    </RelativeLayout>
+
+</RelativeLayout>

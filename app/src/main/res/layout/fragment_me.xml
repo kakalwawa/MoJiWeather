@@ -33,6 +33,7 @@
                     android:src="@mipmap/map" />
 
                 <TextView
+                    android:id="@+id/moji_map"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -170,6 +171,7 @@
                 android:background="#cecece" />
 
             <LinearLayout
+                android:id="@+id/video_moji"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:orientation="horizontal"

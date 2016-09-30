@@ -248,6 +248,7 @@ public class MagicTextView extends TextView {
                 getCompoundPaddingBottom()
         };
         frozen = true;
+
     }
 
     public void unfreeze(){

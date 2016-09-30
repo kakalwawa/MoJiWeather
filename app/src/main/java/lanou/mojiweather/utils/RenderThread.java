@@ -41,10 +41,10 @@ public class RenderThread extends Thread {
     public void run() {
         Log.d("weather", "run");
         //在非主线程使用消息队列
-        Looper.prepare();
+       Looper.prepare();
         renderHandler = new RenderHandler();
         renderHandler.sendEmptyMessage(0);
-        Looper.loop();
+       Looper.loop();
     }
 
     public RenderHandler getRenderHandler() {

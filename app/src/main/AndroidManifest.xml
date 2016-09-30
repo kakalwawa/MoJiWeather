@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <!--读取联系人权限，上传联系人需要用到此权限 -->
     <uses-permission android:name="android.permission.READ_CONTACTS"/>
-
     <!--允许联网 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <!--获取GSM（2g）、WCDMA（联通3g）等网络状态的信息  -->
@@ -21,8 +20,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <!--获取sd卡写的权限，用于文件上传和下载-->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!--允许读取手机状态 用于创建BmobInstallation-->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
 
 
 
@@ -41,14 +39,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity"/>
-
-
         <activity android:name=".background.fragment.SearchActivity"/>
-
+        <activity android:name=".weather.fragment.LocationAcitivity"/>
         <activity android:name=".SignUpActivity"/>
         <activity android:name=".MyInFormationActivity"/>
         <activity android:name=".MoquanLiveActitvty"/>
-
+        <activity android:name=".weather.fragment.SearchCityActivity"/>
 
     </application>
 

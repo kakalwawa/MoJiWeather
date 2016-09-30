@@ -2,8 +2,11 @@ package lanou.mojiweather.weather.fragment;
 
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
@@ -12,6 +15,8 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Surface;
+import android.view.SurfaceHolder;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -127,6 +132,8 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
     private ImageView[] weatherNightIcons;
     private SpeechSynthesizer mTts;
     private WeatherBean bean;
+    private TextView location;
+
     @Override
     protected int setLayout() {
         return R.layout.fragment_weather;
@@ -135,7 +142,7 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
 
     @Override
     protected void initView() {
-        SpeechUtility.createUtility(mContext, SpeechConstant.APPID + "= 57e27478");
+        SpeechUtility.createUtility(mContext, SpeechConstant.APPID + "=57e27478");
         //1.创建SpeechSynthesizer对象, 第二个参数：本地合成时传InitListener
         mTts = SpeechSynthesizer.createSynthesizer(WeatherFragment.this.getContext(), null);
         surfaceView = (SceneSurfaceView) getView().findViewById(R.id.weather_scene);
@@ -148,8 +155,10 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
         rv = (RelativeLayout) getView().findViewById(R.id.select_rl);
         iv = (ImageView) getView().findViewById(R.id.iv_leida);
         icon = (ImageView) getView().findViewById(R.id.iv_icon);
+        location = (TextView) getView().findViewById(R.id.tv_where);
         voice = (ImageView) getView().findViewById(R.id.voice_animation);
         voice.setOnClickListener(this);
+        location.setOnClickListener(this);
         icon.setOnClickListener(this);
         iconFrist.setOnClickListener(this);
         iconSecond.setOnClickListener(this);
@@ -343,6 +352,7 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onResume() {
         super.onResume();
+        Log.d("WeatherFragment", "走进来了");
         surfaceView.resume();
         iv.startAnimation(as);
         String name ="lanou.mojiweather.SETTING";
@@ -429,10 +439,9 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
                             break;
                     }
 //                    mediaPlayer.start();
-
                     mTts.startSpeaking("今天是"+bean.getResults().get(0).getDaily().get(0).getDate()+"今天天气"+bean.getResults().get(0).getDaily().get(0).getText_day()+
                             "最高温度是"+bean.getResults().get(0).getDaily().get(0).getHigh()+"度"+"最低温度是"+bean.getResults().get(0).getDaily().get(0).getLow()+"度"+
-                            "今天的风向是"+bean.getResults().get(0).getDaily().get(0).getWind_direction()+"风风速为"+bean.getResults().get(0).getDaily().get(0).getWind_speed(),mSynListener);
+                            "今天的风向是"+bean.getResults().get(0).getDaily().get(0).getWind_direction()+"风风速为"+bean.getResults().get(0).getDaily().get(0).getWind_speed()+"千米每小时",mSynListener);
                     Log.d("WeatherFragment", "speak");
                     isclick = true ;
                 }
@@ -505,9 +514,18 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
             case R.id.select_rl :
                 rv.setVisibility(View.GONE);
                 break;
+            case R.id.tv_where :
+                Intent intent = new Intent(getContext(),LocationAcitivity.class);
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+
+
         }
 
     }
+
+
+
     @Override
     public void onPause() {
         super.onPause();
@@ -517,6 +535,7 @@ public class WeatherFragment extends BaseFragment implements View.OnClickListene
         if (mTts != null && mTts.isSpeaking()){
             mTts.stopSpeaking();
         }
+
     }
     private SynthesizerListener mSynListener = new SynthesizerListener() {
 
